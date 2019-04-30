@@ -10,7 +10,8 @@
         data(){
             return {
                 // current_radio_src: 'http://live.audiospace.co/rdi451',
-                current_radio_src: '',
+                current_radio_src: 'http://stream.radioskovoroda.com:8060/skovoroda_music',
+                // current_radio_src: '',
             }
         }
     }
