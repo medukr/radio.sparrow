@@ -11,8 +11,8 @@
         :onAirTrackImageUrl="onAirTrackImageUrl"
         :onAirRadioStationImage="onAirRadioStationImage"
         :onAirCategories="onAirCategories"></app-station-single-card>
-
     </div>
+
 </template>
 
 <script>

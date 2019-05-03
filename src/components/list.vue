@@ -4,29 +4,30 @@
         <app-page-header
         :title="title"></app-page-header>
         <!-- End Page Header -->
-
-        <app-station-list
-        :stations="stations"></app-station-list>
+        <app-categories-list></app-categories-list>
+        <app-popular-list></app-popular-list>
     </div>
 </template>
 
 <script>
     import AppPageHeader from './content/pageHeader'
-    import AppStationList from './content/stantionsList'
+    import AppCategoriesList from './categoriesList'
+    import AppPopularList from './popularList'
 
     import {mapGetters} from 'vuex'
 
     export default {
         components: {
             AppPageHeader,
-            AppStationList
+            AppCategoriesList,
+            AppPopularList
         },
         created(){
-          this.$store.dispatch('current/loadStations');
+          // this.$store.dispatch('current/loadStations');
         },
         data(){
             return {
-                title: 'All stations'
+                title: ' '
             }
         },
         computed: {

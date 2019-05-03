@@ -3,10 +3,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                <!-- Main Sidebar -->
-                <app-main-sidebar></app-main-sidebar>
-                <!-- End Main Sidebar -->
-                <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+                <main class="main-content col-lg-12 col-md-12 col-sm-12 p-0">
                     <div class="main-navbar sticky-top bg-white">
                         <!-- Main Navbar -->
                         <app-main-navbar></app-main-navbar>
@@ -23,7 +20,6 @@
 
 <script>
     import appMainSidebar from './components/main-sidebar';
-    import appContent from './components/content';
     import AppFooter from './components/footer';
     import appMainNavbar from './components/main-navbar';
     import Radio from './components/content/audioPlayer'
@@ -32,7 +28,6 @@
         name: 'app',
         components: {
             appMainSidebar,
-            appContent,
             AppFooter,
             appMainNavbar,
             Radio

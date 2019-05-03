@@ -1,12 +1,15 @@
 <template>
-        <div class="row">
+    <div class="row">
+        <div class="col">
+            <h5>Недавно добавленные:</h5>
             <app-station-card v-for="(station,index) in stations"
-                    :onAirRadioStationName="station.radioName"
-                    :onAirRadioStationImage="station.radioImage"
-                    :onAirCategories="station.category"
+                              :onAirRadioStationName="station.radioName"
+                              :onAirRadioStationImage="station.radioImage"
+                              :onAirCategories="station.category"
                               :key="index"
-            @checkedRadio="onCheck($event,station.id)"></app-station-card>
+                              @checkedRadio="onCheck($event,station.id)"></app-station-card>
         </div>
+    </div>
 </template>
 
 <script>

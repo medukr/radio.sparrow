@@ -52,8 +52,8 @@
                 required: true
             },
             onAirTrackImageUrl: {
-              type: String,
-              default: ''  //need default image
+                type: String,
+                default: ''  //need default image
             },
             onAirRadioStationImage: {
                 type: String,
@@ -65,8 +65,8 @@
             }
         },
 
-        data(){
-            return{
+        data() {
+            return {
                 statusBarClasses: {
                     playing: 'progress-bar-striped progress-bar-animated bg-success',
                     pause: 'progress-bar-striped progress-bar bg-success',
@@ -86,33 +86,40 @@
                 paused: 'paused',
                 status: 'status'
             }),
-            trackImage(){
+            trackImage() {
                 return "background-image: url('" + this.onAirTrackImageUrl + "');"
             },
-            radioStationImage(){
+            radioStationImage() {
                 return "background-image: url('" + this.onAirRadioStationImage + "');"
             },
-            statusBar(){
+            statusBar() {
                 switch (this.status) {
-                    case 'play': return this.statusBarClasses.playing;
+                    case 'play':
+                        return this.statusBarClasses.playing;
 
-                    case 'pause': return this.statusBarClasses.pause;
+                    case 'pause':
+                        return this.statusBarClasses.pause;
 
-                    case 'loading': return this.statusBarClasses.waiting;
+                    case 'loading':
+                        return this.statusBarClasses.waiting;
 
-                    case 'error': return this.statusBarClasses.error;
+                    case 'error':
+                        return this.statusBarClasses.error;
 
                 }
 
             },
             playButton() {
                 switch (this.status) {
-                    case 'play': return 'stop';
-                    case 'loading': return 'stop';
-                    case 'pause': return 'play_arrow';
+                    case 'play':
+                        return 'stop';
+                    case 'loading':
+                        return 'stop';
+                    case 'pause':
+                        return 'play_arrow';
                 }
             },
-            disabledButton(){
+            disabledButton() {
                 if (this.status === 'loading' || this.status === 'error') return true;
                 return false
             }
@@ -121,7 +128,7 @@
             ...mapActions('player', {
                 setPaused: 'setPaused'
             }),
-            onClick(){
+            onClick() {
                 if (this.status === 'play') document.getElementsByTagName('audio')[0].pause();
                 else document.getElementsByTagName('audio')[0].play();
             }

@@ -1,6 +1,8 @@
 <template>
-    <audio width="300" height="48" controls="controls" class="nav-item" autoplay style="display:none">
-        <source :src="radioSrc" type="audio/mpeg"/>
+    <audio width="300" height="48" controls="controls" class="nav-item" autoplay>
+        <source
+                :src="src"
+                :type="type"/>
         Your browser does not support HTML5 audio. Please update your browser to view this media content.
     </audio>
 </template>
@@ -10,7 +12,7 @@
     import {mapActions} from 'vuex';
 
     export default {
-        props: ['radioSrc'],
+        props: ['current'],
         data() {
             return {
                 domAudio: Element
@@ -19,7 +21,15 @@
         computed: {
             ...mapGetters('player', {
                 paused: 'paused',
-            })
+            }),
+            src(){
+                // return (this.current != null) ? this.current.streams[0].stream : '';
+                return  '';
+            },
+            type(){
+                // return (this.current != null) ? this.current.streams[0].content_type : '';
+                return  '';
+            }
         },
         methods: {
             ...mapActions('player', {
@@ -53,6 +63,7 @@
 
         },
         updated() {
+
             this.domAudio.load();
         },
 
