@@ -3,44 +3,80 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
-// import ProductList from './components/ProductList';
-// import Cart from './components/Cart';
-// import E404 from './components/E404';
-// import Product from './components/Product';
-// import Checkout from './components/Checkout';
+import AppPlay from './components/play'
+import AppList from './components/list'
+import AppError from './components/error404'
+import AppHistory from './components/history'
+import AppAddNewRadio from './components/addNewRadio'
+import AppFavorites from './components/favorites'
+import AppCategories from './components/categories'
+import AppSearch from './components/search'
 
 // import {store} from './store';
 
 const routes = [
+    {
+        path: '',
+        redirect: {name: 'list'}
+    },
+    {
+        name: 'play',
+        path: '/play',
+        component: AppPlay
+    },
+    {
+        name: 'list',
+        path: '/list',
+        component: AppList
+    },
+    {
+        name: 'history',
+        path: '/history',
+        component: AppHistory
+    },
+    {
+        name: 'playlist_add',
+        path: '/playlist_add',
+        component: AppAddNewRadio
+    },
+    {
+        name: 'favorites',
+        path: '/favorites',
+        component: AppFavorites
+    },
+    {
+        name: 'categories',
+        path: '/categories',
+        component: AppCategories
+    },
+    {
+        name: 'search',
+        path: '/search',
+        component: AppSearch
+    },
     // {
-    //     path: '',
-    //     redirect: {name: 'products'}
-    // },
-    // {
-    //     name: 'products',
-    //     path: '/products',
-    //     component: ProductList,
+    //     name: 'list',
+    //     path: '/list',
+    //     component: AppStationList,
     //     beforeEnter(from, to, next){
     //         store.dispatch('products/loadItems');
     //         next();
     //     }
     // },
     // {
+    //     name: 'products',
     //     path: '/products/:id',
     //     component: Product
     // },
-    // {
-    //     path: '/cart',
-    //     component: Cart
-    // },
+
     // {
     //     path: '/checkout',
     //     component: Checkout
     // },
-    // {
-    //     path: '*',
-    //     component: E404
-    // }
+    {
+        path: '*',
+        component: AppError
+    }
 ];
 
 export const router = new VueRouter({

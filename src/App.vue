@@ -10,10 +10,9 @@
                     <div class="main-navbar sticky-top bg-white">
                         <!-- Main Navbar -->
                         <app-main-navbar></app-main-navbar>
-
                     </div>
                     <!-- / .main-navbar -->
-                    <app-content></app-content>
+                    <router-view></router-view>
                     <app-footer></app-footer>
                 </main>
             </div>

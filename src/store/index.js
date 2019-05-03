@@ -3,17 +3,13 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-// import cart from './modules/cart';
-// import products from './modules/products';
-// import menu from './modules/menu';
-// import orderForm from './modules/orderForm';
+import current from './modules/current';
+import player from './modules/player'
 
 export const store = new Vuex.Store({
     modules: {
-        // menu,
-        // products,
-        // cart,
-        // orderForm
+        current,
+        player
     },
     strict: process.env.NODE_ENV != 'production',
 });

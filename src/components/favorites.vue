@@ -3,18 +3,17 @@
         <!-- Page Header -->
         <app-page-header></app-page-header>
         <!-- End Page Header -->
-
+        <h1>Favorites</h1>
     </div>
 </template>
 
 <script>
-    import appPageHeader from './content/pageHeader'
-
+    import AppPageHeader from './content/pageHeader'
 
     export default {
         components: {
-            appPageHeader
-        },
+            AppPageHeader
+        }
     }
 </script>
 

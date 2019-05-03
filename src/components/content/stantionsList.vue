@@ -1,18 +1,12 @@
 <template>
-    <div>
         <div class="row">
-            <app-station-card></app-station-card>
-            <app-station-card></app-station-card>
-            <app-station-card></app-station-card>
-            <app-station-card></app-station-card>
+            <app-station-card v-for="(station,index) in stations"
+                    :onAirRadioStationName="station.radioName"
+                    :onAirRadioStationImage="station.radioImage"
+                    :onAirCategories="station.category"
+                              :key="index"
+            @checkedRadio="onCheck($event,station.id)"></app-station-card>
         </div>
-        <div class="row">
-            <app-station-card-aside></app-station-card-aside>
-            <app-station-card-aside></app-station-card-aside>
-            <app-station-card-aside></app-station-card-aside>
-            <app-station-card-aside></app-station-card-aside>
-        </div>
-    </div>
 </template>
 
 <script>
@@ -24,8 +18,20 @@
             AppStationCard,
             AppStationCardAside
         },
+        props: {
+          stations: {
+
+              required: true
+          }
+        },
         data(){
             return {
+
+            }
+        },
+        methods: {
+            onCheck(event, id){
+                this.$store.dispatch('current/setCurrent', id);
 
             }
         }
