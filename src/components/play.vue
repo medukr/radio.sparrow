@@ -19,6 +19,8 @@
     import AppPageHeader from './content/pageHeader'
     import AppStationSingleCard from './content/stationSingleCard'
 
+    import {mapGetters} from 'vuex'
+
     export default {
         components: {
             AppStationSingleCard,
@@ -30,20 +32,23 @@
             }
         },
         computed : {
+            ...mapGetters('current', {
+                current: 'current'
+            }),
             onAirSongName(){
-               return this.$store.getters['current/trackName']
+               return 'no name'
             },
             onAirRadioStationName(){
-                return this.$store.getters['current/radioName']
+                return this.current != null ? this.current.name : ''
             },
             onAirTrackImageUrl(){
-                return this.$store.getters['current/trackImage']
+                return '/src/assets/images/radio_logo/no-track-image.png'
             },
             onAirRadioStationImage(){
-                return this.$store.getters['current/radioImage']
+                return this.current != null ? this.current.image.url : ''
             },
             onAirCategories(){
-                return this.$store.getters['current/category']
+                return 'no category'
             }
         }
     }

@@ -19,7 +19,7 @@ const routes = [
         component: AppPlay
     },
     {
-
+        name: 'home',
         path: '',
         component: AppList
     },

@@ -9,8 +9,10 @@
                         <app-main-navbar></app-main-navbar>
                     </div>
                     <!-- / .main-navbar -->
+                    <keep-alive>
                     <router-view></router-view>
                     <app-footer></app-footer>
+                    </keep-alive>
                 </main>
             </div>
         </div>
@@ -51,10 +53,10 @@
     }
 
     .card-post__image {
-        min-height: 10em;
+        min-height: 8em;
     }
 
     .card-post--aside .card-post__image {
-        min-width: 10em;
+        min-width: 8em;
     }
 </style>

@@ -4,36 +4,60 @@
         <app-page-header
         :title="title"></app-page-header>
         <!-- End Page Header -->
-        <app-categories-list></app-categories-list>
-        <app-popular-list></app-popular-list>
+            <app-categories-list></app-categories-list>
+            <app-station-list
+                    title="Недавно добавлены"
+                    :stations="recent"
+                    @selectedRadio="onSelect"></app-station-list>
+            <app-station-list
+                    title="Популярное"
+                    :stations="popular"
+                    @selectedRadio="onSelect"></app-station-list>
     </div>
 </template>
 
 <script>
     import AppPageHeader from './content/pageHeader'
     import AppCategoriesList from './categoriesList'
-    import AppPopularList from './popularList'
+    import AppStationList from './content/stationList'
 
-    import {mapGetters} from 'vuex'
+    import {mapGetters, mapActions} from 'vuex'
 
     export default {
         components: {
             AppPageHeader,
             AppCategoriesList,
-            AppPopularList
+            AppStationList,
         },
-        created(){
-          // this.$store.dispatch('current/loadStations');
+        created() {
+            this.loadCountries();
+            this.loadPopular();
+            this.loadRecent();
+
         },
-        data(){
+        data() {
             return {
-                title: ' '
+                title: 'Radio.Sparrow'
             }
         },
         computed: {
-            ...mapGetters('current', {
-                stations: 'stations'
+            ...mapGetters('data', {
+                popular: 'popular',
+                recent: 'recent'
             })
+        },
+        methods : {
+            ...mapActions('data', {
+                loadPopular: 'loadPopular',
+                loadRecent: 'loadRecent',
+                loadCountries: 'loadCountries'
+            }),
+            ...mapActions('current', {
+                setCurrent: 'setCurrent'
+            }),
+            onSelect(selectedStation) {
+                this.setCurrent(selectedStation)
+            }
         }
 
     }

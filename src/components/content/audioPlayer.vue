@@ -1,5 +1,5 @@
 <template>
-    <audio width="300" height="48" controls="controls" class="nav-item" autoplay>
+    <audio width="300" height="48" controls="controls" class="nav-item" autoplay style="display: none">
         <source
                 :src="src"
                 :type="type"/>
@@ -12,7 +12,7 @@
     import {mapActions} from 'vuex';
 
     export default {
-        props: ['current'],
+        props: ['src', 'type'],
         data() {
             return {
                 domAudio: Element
@@ -22,14 +22,7 @@
             ...mapGetters('player', {
                 paused: 'paused',
             }),
-            src(){
-                // return (this.current != null) ? this.current.streams[0].stream : '';
-                return  '';
-            },
-            type(){
-                // return (this.current != null) ? this.current.streams[0].content_type : '';
-                return  '';
-            }
+
         },
         methods: {
             ...mapActions('player', {

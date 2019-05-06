@@ -1,36 +1,32 @@
 <template>
     <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
-
-        <radio :station="current"></radio>
-        <app-search-form></app-search-form>
-
-
-        <ul class="navbar-nav border-left flex-row ">
-            <li class="nav-item border-right dropdown notifications ">
-                <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="navbar-nav">
+            <div class="nav-item">
+                <a class="nav-link nav-link-icon text-center" href="#">
                     <div class="nav-link-icon__wrapper">
-                        <i class="material-icons ">play_arrow</i>
+                        <router-link
+                                :to="{name: 'home'}">
+                            <i class="material-icons">radio</i>
+                        </router-link>
                     </div>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <div class="dropdown-item">
-                        <div class="text-center">
-                            <router-link
-                            :to="{name: 'play'}">
-                                <i class="material-icons">play_arrow</i>
-                            </router-link>
-                        </div>
+            </div>
+        </div>
+        <div class="navbar-nav">
+            <div class="nav-item">
+                <a class="nav-link nav-link-icon text-center" href="#">
+                    <div class="nav-link-icon__wrapper">
+                        <router-link
+                                :to="{name: 'play'}">
+                            <i class="material-icons">play_arrow</i>
+                        </router-link>
                     </div>
-                </div>
-
-            </li>
-
-
-
-
-
-        </ul>
-
+                </a>
+            </div>
+        </div>
+        <radio :src="src"
+        type="audio/mpeg"></radio>
+        <app-search-form></app-search-form>
     </nav>
 </template>
 
@@ -52,8 +48,10 @@
             //     current: 'current'
             // })
             current(){
-
                 return this.$store.getters['current/current']
+            },
+            src(){
+                return this.current != null ?  this.current.streams[0].stream : '';
             }
         },
 
