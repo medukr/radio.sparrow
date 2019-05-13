@@ -36,9 +36,14 @@
         },
         computed : {
             ...mapGetters('player', {
-                station: 'station'
+                station: 'station',
+                songHistory: "songHistory"
             }),
             onAirSongName(){
+                if (this.station !== null && this.songHistory !== null) {
+                    return this.songHistory[0].title + ' : ' + this.songHistory[0].name
+                    // console.log('--->', this.songHistory);
+                }
                return 'no name'
             },
             onAirRadioStationName(){
@@ -65,8 +70,14 @@
         },
         methods: {
             ...mapActions('player',{
-                loadCurrentStation: 'loadCurrentStation'
+                loadCurrentStation: 'loadCurrentStation',
+                loadSongHistory: 'loadSongHistory'
             })
+        },
+        watch: {
+          loadSong(){
+
+          }
         },
         mounted() {
             if (this.station === null || this.id !== this.station.id) this.loadCurrentStation(this.id);

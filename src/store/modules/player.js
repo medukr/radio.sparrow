@@ -6,6 +6,7 @@ export default {
         paused: true,
         domAudio: null,
         station: null,
+        songHistory: null,
     },
     getters: {
         status(state) {
@@ -19,6 +20,9 @@ export default {
         },
         station(state){
             return state.station;
+        },
+        songHistory(state){
+            return state.songHistory;
         }
     },
     mutations: {
@@ -34,6 +38,9 @@ export default {
         setStation(state, payLoad){
             state.station = payLoad;
         },
+        setSongHistory(state, payLoad){
+            state.songHistory = payLoad;
+        }
     },
     actions: {
         setStatus(store, payLoad){
@@ -57,8 +64,23 @@ export default {
                 .then(response => response.json())
                 .then(data => {
                     store.commit('setStation', data);
+                    store.dispatch('loadSongHistory');
                 }).catch((res) => {
                     console.log('--->ERROR---> loadCurrentStation', res);
+                }
+            )
+        },
+        loadSongHistory(store, payLoad){
+            Vue.http.get('getSongHistory.php', {
+                params: {
+                    id: payLoad
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    store.commit('setSongHistory', data);
+                }).catch((res) => {
+                    console.log('--->ERROR---> loadSongHistory', res);
                 }
             )
         }
