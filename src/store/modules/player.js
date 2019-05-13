@@ -4,7 +4,8 @@ export default {
     state:{
         status: '',
         paused: true,
-        domAudio: Element
+        domAudio: null,
+        station: null,
     },
     getters: {
         status(state) {
@@ -15,6 +16,9 @@ export default {
         },
         domAudio(state) {
             return state.domAudio;
+        },
+        station(state){
+            return state.station;
         }
     },
     mutations: {
@@ -26,7 +30,10 @@ export default {
         },
         setDomAudio(state, payLoad){
             state.domAudio = payLoad
-        }
+        },
+        setStation(state, payLoad){
+            state.station = payLoad;
+        },
     },
     actions: {
         setStatus(store, payLoad){
@@ -37,6 +44,23 @@ export default {
         },
         setDomAudio(store, payLoad){
             store.commit('setDomAudio', payLoad)
+        },
+        setStation(store, payLoad){
+            store.commit('setStation', payLoad);
+        },
+        loadCurrentStation(store, payLoad){
+            Vue.http.get('getCurrent.php', {
+                params: {
+                    id: payLoad
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    store.commit('setStation', data);
+                }).catch((res) => {
+                    console.log('--->ERROR---> loadCurrentStation', res);
+                }
+            )
         }
     }
 

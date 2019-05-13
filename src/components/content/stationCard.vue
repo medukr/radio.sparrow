@@ -1,6 +1,6 @@
 <template>
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-        <div class="card card-small card-post card-post--1 container" @click.prevent="onClick">
+    <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4 d-inline-block">
+        <div class="card card-small card-post card-post--1" @click.prevent="onClick">
                 <div class="card-post__image"
                      :style="radioStationImage">
                 </div>

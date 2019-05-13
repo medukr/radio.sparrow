@@ -5,12 +5,13 @@
         :title="title"></app-page-header>
         <!-- End Page Header -->
 
-        <app-station-single-card
+        <app-station-single-card v-if="station !== null"
         :onAirSongName="onAirSongName"
         :onAirRadioStationName="onAirRadioStationName"
         :onAirTrackImageUrl="onAirTrackImageUrl"
         :onAirRadioStationImage="onAirRadioStationImage"
         :onAirCategories="onAirCategories"></app-station-single-card>
+        <app-css-load v-else></app-css-load>
     </div>
 
 </template>
@@ -18,13 +19,15 @@
 <script>
     import AppPageHeader from './content/pageHeader'
     import AppStationSingleCard from './content/stationSingleCard'
+    import AppCssLoad from './content/cssLoad';
 
-    import {mapGetters} from 'vuex'
+    import {mapGetters, mapActions} from 'vuex'
 
     export default {
         components: {
             AppStationSingleCard,
-            AppPageHeader
+            AppPageHeader,
+            AppCssLoad
         },
         data(){
             return {
@@ -32,24 +35,41 @@
             }
         },
         computed : {
-            ...mapGetters('current', {
-                current: 'current'
+            ...mapGetters('player', {
+                station: 'station'
             }),
             onAirSongName(){
                return 'no name'
             },
             onAirRadioStationName(){
-                return this.current != null ? this.current.name : ''
+                return this.station !== null
+                    ? this.station.name
+                    : 'no station'
             },
             onAirTrackImageUrl(){
                 return '/src/assets/images/radio_logo/no-track-image.png'
             },
             onAirRadioStationImage(){
-                return this.current != null ? this.current.image.url : ''
+                return this.station !== null
+                    ? this.station.image.url
+                    : '/src/assets/images/radio_logo/noimage.png'
             },
             onAirCategories(){
-                return 'no category'
+                return this.station !== null
+                    ? this.station.categories[0].title
+                    : 'no category'
+            },
+            id(){
+                return this.$route.params.id
             }
+        },
+        methods: {
+            ...mapActions('player',{
+                loadCurrentStation: 'loadCurrentStation'
+            })
+        },
+        mounted() {
+            if (this.station === null || this.id !== this.station.id) this.loadCurrentStation(this.id);
         }
     }
 </script>

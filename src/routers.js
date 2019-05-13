@@ -6,8 +6,8 @@ Vue.use(VueRouter);
 import AppPlay from './components/play'
 import AppList from './components/list'
 import AppError from './components/error404'
-import AppAddNewRadio from './components/addNewRadio'
 import AppSearch from './components/search'
+import AppListFromCategory from './components/listFromCategory'
 
 // import {store} from './store';
 
@@ -15,7 +15,7 @@ const routes = [
 
     {
         name: 'play',
-        path: '/play',
+        path: '/play/:id',
         component: AppPlay
     },
     {
@@ -24,15 +24,19 @@ const routes = [
         component: AppList
     },
     {
-        name: 'playlist_add',
-        path: '/playlist_add',
-        component: AppAddNewRadio
+        name: 'listFromCategory',
+        path: '/category/:slug',
+        component: AppListFromCategory
     },
     {
         name: 'search',
         path: '/search',
         component: AppSearch
     },
+    {
+        path: '*',
+        component: AppError
+    }
     // {
     //     name: 'list',
     //     path: '/list',
@@ -52,10 +56,7 @@ const routes = [
     //     path: '/checkout',
     //     component: Checkout
     // },
-    {
-        path: '*',
-        component: AppError
-    }
+
 ];
 
 export const router = new VueRouter({

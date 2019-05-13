@@ -13,13 +13,22 @@ export default {
     mutations:{
         setCurrent(state, payLoad){
             state.current = payLoad;
-        }
+        },
     },
     actions: {
         setCurrent(store, payLoad){
-
             store.commit('setCurrent', payLoad);
+        },
+        loadCurrentStation(store, payLoad){
+            Vue.http.get('getCurrent.php')
+                .then(response => response.json())
+                .then(data => {
+                    store.commit('setCurrent', data);
+                }).catch((res) => {
+                    console.log('--->ERROR---> loadCurrentStation', res);
+                }
+            )
         }
-    }
+    },
 
 }

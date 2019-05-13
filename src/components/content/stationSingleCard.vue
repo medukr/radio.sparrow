@@ -114,14 +114,16 @@
                     case 'play':
                         return 'stop';
                     case 'loading':
-                        return 'stop';
+                        return 'play_arrow';
                     case 'pause':
                         return 'play_arrow';
                 }
             },
             disabledButton() {
-                if (this.status === 'loading' || this.status === 'error') return true;
-                return false
+                // if (this.status === 'loading' || this.status === 'error') return true;
+                // return false
+
+                return false;
             }
         },
         methods: {
@@ -129,8 +131,10 @@
                 setPaused: 'setPaused'
             }),
             onClick() {
-                if (this.status === 'play') document.getElementsByTagName('audio')[0].pause();
-                else document.getElementsByTagName('audio')[0].play();
+                let audioTag = document.getElementsByTagName('audio')[0];
+
+                if (this.status === 'play') audioTag.pause();
+                else audioTag.play();
             }
         }
     }

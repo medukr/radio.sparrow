@@ -5,7 +5,8 @@ export default {
         popular: null,
         recent: null,
         countries: null,
-        primaryCategories: null
+        primaryCategories: null,
+        allCategories: null
     },
     getters: {
         popular(state){
@@ -19,6 +20,9 @@ export default {
         },
         primaryCategories(state){
             return state.primaryCategories
+        },
+        allCategories(state){
+            return state.allCategories
         }
     },
     mutations: {
@@ -33,6 +37,9 @@ export default {
         },
         loadPrimaryCategories(state, data){
             state.primaryCategories = data;
+        },
+        loadAllCategories(state, data){
+            state.allCategories = data;
         }
     },
     actions: {
@@ -73,6 +80,16 @@ export default {
                     store.commit('loadPrimaryCategories', data)
                 }).catch((res) => {
                     console.log('--->ERROR---> load PrimaryCategories', res);
+                }
+            )
+        },
+        loadAllCategories(store){
+            Vue.http.get('getAllCategories.php')
+                .then(response => response.json())
+                .then(data => {
+                    store.commit('loadAllCategories', data)
+                }).catch((res) => {
+                    console.log('--->ERROR---> load AllCategories', res);
                 }
             )
         }

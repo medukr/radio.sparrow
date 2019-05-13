@@ -1,23 +1,23 @@
 <template>
-    <div>
-
+    <div class="h-100">
         <div class="container-fluid">
             <div class="row">
                 <main class="main-content col-lg-12 col-md-12 col-sm-12 p-0">
-                    <div class="main-navbar sticky-top bg-white">
                         <!-- Main Navbar -->
                         <app-main-navbar></app-main-navbar>
-                    </div>
                     <!-- / .main-navbar -->
                     <keep-alive>
-                    <router-view></router-view>
-                    <app-footer></app-footer>
+                        <transition name="router">
+                            <router-view></router-view>
+                        </transition>
                     </keep-alive>
+                </main>
+                <main class="main-content col-lg-12 col-md-12 col-sm-12 p-0">
+                    <app-footer></app-footer>
                 </main>
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -36,7 +36,8 @@
         },
         data() {
             return {
-                msg: 'Welcome to Your Vue.js App'
+                enterActiveClass: 'animated bounceLeft ',
+                leaveActiveClass: 'animated bounceOutLeft'
             }
         }
     }
@@ -52,11 +53,47 @@
         filter:     none !important;
     }
 
-    .card-post__image {
-        min-height: 8em;
+    /*.card-post__image {*/
+    /*    min-height: 8em;*/
+    /*}*/
+
+    /*.card-post--aside .card-post__image {*/
+    /*    min-width: 8em;*/
+    /*}*/
+
+    .router-enter-active{
+        /*animation: slideIn 0.5s;*/
+        -webkit-animation-duration: 0.75s;
+        animation-duration: 0.75s;
+        -webkit-animation-name: bounceInUp;
+        animation-name: bounceInUp;
     }
 
-    .card-post--aside .card-post__image {
-        min-width: 8em;
+    .router-enter-to{
+
+    }
+
+    .router-leave{
+
+    }
+
+    .router-leave-active{
+
+        animation: slideOut 0.5s;
+        position: absolute;
+    }
+
+    .router-leave-to{
+
+    }
+
+
+    @keyframes slideIn {
+        from{transform: translateX(-2000px)}
+        to{transform: translateX(0px)}
+    }
+    @keyframes slideOut {
+        from{transform: translateX(0px)}
+        to{transform: translateX(-2000px)}
     }
 </style>

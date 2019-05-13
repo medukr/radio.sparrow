@@ -12,16 +12,22 @@
     import {mapActions} from 'vuex';
 
     export default {
-        props: ['src', 'type'],
         data() {
             return {
-                domAudio: Element
+                domAudio: null
             }
         },
         computed: {
             ...mapGetters('player', {
                 paused: 'paused',
+                station: 'station'
             }),
+            src(){
+                return this.station !== null ?  this.station.streams[0].stream : null;
+            },
+            type(){
+                return this.station !== null ?  this.station.streams[0].content_type : null;
+            }
 
         },
         methods: {
@@ -32,7 +38,6 @@
             }),
         },
         mounted() {
-
             this.domAudio = this.$vnode.elm;
 
             this.domAudio.onpause = () => {
@@ -54,9 +59,11 @@
                 this.setStatus('loading')
             };
 
+
+            this.domAudio.autoplay = true;
+
         },
         updated() {
-
             this.domAudio.load();
         },
 

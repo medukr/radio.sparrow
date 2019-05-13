@@ -18,7 +18,7 @@
 
 <script>
     import AppPageHeader from './content/pageHeader'
-    import AppCategoriesList from './categoriesList'
+    import AppCategoriesList from './content/categoriesList'
     import AppStationList from './content/stationList'
 
     import {mapGetters, mapActions} from 'vuex'
@@ -44,6 +44,9 @@
             ...mapGetters('data', {
                 popular: 'popular',
                 recent: 'recent'
+            }),
+            ...mapGetters('player', {
+                station: 'station'
             })
         },
         methods : {
@@ -52,14 +55,14 @@
                 loadRecent: 'loadRecent',
                 loadCountries: 'loadCountries'
             }),
-            ...mapActions('current', {
-                setCurrent: 'setCurrent'
+            ...mapActions('player', {
+                setStation: 'setStation',
+                loadCurrentStation: 'loadCurrentStation'
             }),
             onSelect(selectedStation) {
-                this.setCurrent(selectedStation)
+                if (this.station === null || selectedStation.id !== this.station.id) this.loadCurrentStation(selectedStation.id);
             }
         }
-
     }
 </script>
 
