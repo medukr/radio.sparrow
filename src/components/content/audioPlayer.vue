@@ -40,24 +40,25 @@
         mounted() {
             this.domAudio = this.$vnode.elm;
 
-            this.domAudio.onpause = () => {
+            this.domAudio.addEventListener('pause', () => {
                 this.setStatus('pause')
-            };
+            });
 
-            this.domAudio.onplaying = () =>  {
+            this.domAudio.addEventListener('playing', () => {
                 this.setStatus('play')
-            };
+            });
 
-            this.domAudio.onloadstart = () => {
+            this.domAudio.addEventListener('loadstart', () => {
                 this.setStatus('loading')
-            };
-            this.domAudio.onerror = () => {
+            });
+
+            this.domAudio.addEventListener('error', () => {
                 this.setStatus('error')
-            };
+            });
 
-            this.domAudio.onstalled = () => {
+            this.domAudio.addEventListener('stalled', () => {
                 this.setStatus('loading')
-            };
+            });
 
 
             this.domAudio.autoplay = true;

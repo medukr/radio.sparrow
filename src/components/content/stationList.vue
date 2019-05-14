@@ -8,11 +8,11 @@
                                       :station="station"
                                       :key="(station.id + randSolt() + index)"
                                       @selectedRadio="onSelect(station)"></app-station-card>
-                    <v-pagination v-model="currentPage"
-                                  :page-count="20"
-                                  :classes="bootstrapPaginationClasses"
-                                  :labels="customLabels"
-                                  @change="onChange"></v-pagination>
+<!--                    <v-pagination v-model="currentPage"-->
+<!--                                  :page-count="20"-->
+<!--                                  :classes="bootstrapPaginationClasses"-->
+<!--                                  :labels="customLabels"-->
+<!--                                  @change="onChange"></v-pagination>-->
 
                 </template>
                 <template v-else>

@@ -7,6 +7,10 @@ export default {
         domAudio: null,
         station: null,
         songHistory: null,
+        similarStations: null,
+        service: {
+            updateSongHistoryTimer: null
+        }
     },
     getters: {
         status(state) {
@@ -23,6 +27,12 @@ export default {
         },
         songHistory(state){
             return state.songHistory;
+        },
+        similarStations(state){
+            return state.similarStations;
+        },
+        service(state){
+          return state.service;
         }
     },
     mutations: {
@@ -40,6 +50,12 @@ export default {
         },
         setSongHistory(state, payLoad){
             state.songHistory = payLoad;
+        },
+        setSimilarStations(state, payLoad){
+            state.similarStations = payLoad
+        },
+        setUpdateSongHistoryTimer(state, payLoad){
+            state.service.updateSongHistoryTimer = payLoad;
         }
     },
     actions: {
@@ -65,6 +81,7 @@ export default {
                 .then(data => {
                     store.commit('setStation', data);
                     store.dispatch('loadSongHistory');
+                    store.dispatch('loadSimilarStations');
                 }).catch((res) => {
                     console.log('--->ERROR---> loadCurrentStation', res);
                 }
@@ -83,6 +100,23 @@ export default {
                     console.log('--->ERROR---> loadSongHistory', res);
                 }
             )
+        },
+        loadSimilarStations(store, payLoad) {
+            Vue.http.get('getSimilar.php', {
+                params: {
+                    id: payLoad
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    store.commit('setSimilarStations', data);
+                }).catch((res) => {
+                    console.log('--->ERROR---> loadSimilarStations', res);
+                }
+            )
+        },
+        setUpdateSongHistoryTimer(store, payLoad){
+            store.commit('setUpdateSongHistoryTimer', payLoad)
         }
     }
 

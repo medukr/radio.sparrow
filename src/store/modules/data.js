@@ -92,6 +92,6 @@ export default {
                     console.log('--->ERROR---> load AllCategories', res);
                 }
             )
-        }
+        },
     }
 }

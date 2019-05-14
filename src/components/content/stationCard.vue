@@ -1,16 +1,16 @@
 <template>
     <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4 d-inline-block">
-        <div class="card card-small card-post card-post--1" @click.prevent="onClick">
-                <div class="card-post__image"
-                     :style="radioStationImage">
-                </div>
-                <div class="border-top text-center">
-                    <h6 class="">
-                        <a class="text-fiord-blue" href="#" >{{station.name}}</a>
-                    </h6>
-                    <span class="text-muted">{{country}}</span>
-                </div>
-        </div>
+        <a :href="'/play/' + station.id" class="card card-small card-post card-post--1" @click.prevent="onClick">
+            <div class="card-post__image"
+                 :style="radioStationImage">
+            </div>
+            <div class="border-top text-center">
+                <h6 class="">
+                    <span class="text-fiord-blue">{{station.name}}</span>
+                </h6>
+                <span class="text-muted">{{country}}</span>
+            </div>
+        </a>
     </div>
 </template>
 
@@ -29,7 +29,9 @@
                 countries: 'countries'
             }),
             radioStationImage(){
-                return "background-image: url('" + this.station.image.url + "');"
+                return this.station.image.url !== null
+                    ? "background-image: url('" + this.station.image.url + "');"
+                    : "background-image: url('/src/assets/images/radio_logo/noimage.png');"
             },
             country(){
                 let country = '';
@@ -55,6 +57,7 @@
 </script>
 
 <style scoped>
-
-
+    a:hover {
+        text-decoration: none;
+    }
 </style>

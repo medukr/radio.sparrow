@@ -141,5 +141,7 @@
 </script>
 
 <style scoped>
-
+.card-post__image {
+    min-height: 16rem;
+}
 </style>
