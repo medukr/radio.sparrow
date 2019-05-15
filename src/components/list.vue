@@ -4,6 +4,7 @@
         <app-page-header
         :title="title"></app-page-header>
         <!-- End Page Header -->
+        <div class="col-lg-9 col-md-9 float-left">
             <app-categories-list></app-categories-list>
             <app-station-list
                     title="Недавно добавлены"
@@ -13,6 +14,22 @@
                     title="Популярное"
                     :stations="popular"
                     @selectedRadio="onSelect"></app-station-list>
+        </div>
+        <div class="col-lg-3 col-md-3 float-right">
+            <div>
+                <div style="
+                border: 1px solid black;
+                min-height: 350px;
+                width: auto;
+                ">
+                    <p class="p-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, delectus dolor ducimus excepturi fugiat illum, magnam magni possimus quod, rem ullam unde veritatis voluptate! Ab adipisci beatae doloremque doloribus eos error excepturi iusto labore modi, nam nostrum quas quibusdam rerum sequi similique sit voluptate voluptatum? Architecto atque ea ratione reprehenderit!</p>
+                </div>
+            </div>
+            <app-station-list
+                    title="Часто слушают"
+                    :stations="popular"
+                    @selectedRadio="onSelect"></app-station-list>
+        </div>
     </div>
 </template>
 
@@ -30,10 +47,9 @@
             AppStationList,
         },
         created() {
-            this.loadCountries();
             this.loadPopular();
             this.loadRecent();
-
+            this.loadCountries();
         },
         data() {
             return {
@@ -56,11 +72,10 @@
                 loadCountries: 'loadCountries'
             }),
             ...mapActions('player', {
-                setStation: 'setStation',
-                loadCurrentStation: 'loadCurrentStation'
+                changeStation: 'changeStation'
             }),
             onSelect(selectedStation) {
-                if (this.station === null || selectedStation.id !== this.station.id) this.loadCurrentStation(selectedStation.id);
+                this.changeStation(selectedStation.id);
             }
         }
     }

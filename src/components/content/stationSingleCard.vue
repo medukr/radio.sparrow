@@ -5,14 +5,15 @@
                  :style="trackImage">
                 <a href="#" class="card-post__category badge badge-pill badge-success">{{onAirCategories}}</a>
                 <div class="card-post__author d-flex">
-                    <a href="#" class="card-post__author-avatar card-post__author-avatar--small"
-                       :style="radioStationImage">{{onAirRadioStationName}}</a>
+                    <div class="card-post__author-avatar"
+                       :style="radioStationImage"></div>
                 </div>
             </div>
             <div class="card-body">
-                <h5 class="card-title">
-                    <a class="text-fiord-blue" href="#">{{onAirRadioStationName}}</a>
+                <h5 class="card-title d-inline-block">
+                    <span class="text-fiord-blue">{{onAirRadioStationName}}</span>
                 </h5>
+                <p class="card-text d-inline-block mb-1">{{onAirStationCountryName}}</p>
                 <div class="progress mb-3">
                     <div
                             class="progress-bar "
@@ -60,6 +61,10 @@
                 default: ''  //need default image
             },
             onAirCategories: {
+                type: String,
+                default: '' //need default category
+            },
+            onAirStationCountryName: {
                 type: String,
                 default: '' //need default category
             }
@@ -124,7 +129,7 @@
                 // return false
 
                 return false;
-            }
+            },
         },
         methods: {
             ...mapActions('player', {

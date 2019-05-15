@@ -2,19 +2,18 @@
     <div class="main-content-container container-fluid px-4">
         <!-- Page Header -->
         <app-page-header
-                title="Жанры"></app-page-header>
+                :title="title"></app-page-header>
         <!-- End Page Header -->
 
-            <app-station-list
-                    :title="category.title"
-                    :stations="stations"
-                    @selectedRadio="onSelect"></app-station-list>
+        <app-station-list
+                :title="categoryTitle"
+                :stations="stationsFromCategory"
+                @selectedRadio="onSelect"></app-station-list>
     </div>
 </template>
 
 <script>
     import AppPageHeader from './content/pageHeader'
-    import AppCategoriesList from './content/categoriesList'
     import AppStationList from './content/stationList'
 
     import {mapGetters, mapActions} from 'vuex'
@@ -24,47 +23,68 @@
             AppPageHeader,
             AppStationList,
         },
-        created() {
-            // this.loadCountries();
-
-        },
         data() {
             return {
-                title: 'Radio.Sparrow'
+                title: 'Жанры'
             }
         },
         computed: {
             ...mapGetters('data', {
-                allCategories: 'allCategories'
+                allCategories: 'allCategories',
+                stationsFromCategory: 'stationsFromCategory'
             }),
+            ...mapGetters('player', {
+                station: 'station'
+            }),
+            categoryTitle(){
+                if (this.allCategories !== null) {
+                    let category = this.allCategories.filter((el) => {
+                        return el.slug === this.slug ? true : false;
+                    });
+
+                    return category[0].title;
+                }
+            },
             slug(){
-                return this.$route.params.slug
+                return this.$route.params.slug;
             },
-            category(){
-                let category = this.allCategories.filter((el) => {
-                    return el.slug === this.slug ? true : false;
-                });
+            id(){
+                if (this.allCategories !== null) {
+                    let category = this.allCategories.filter((el) => {
+                        return el.slug === this.slug ? true : false;
+                    });
 
-                return category[0];
-            },
-            stations(){
-
+                    return category[0].id;
+                }
+                else return null
             }
         },
         methods : {
             ...mapActions('data', {
-            //     loadPopular: 'loadPopular',
-            //     loadRecent: 'loadRecent',
-            //     loadCountries: 'loadCountries'
-                  loadAllCategories:'loadAllCategories'
+                loadStationsFromCategory: 'loadStationsFromCategory',
+                loadAllCategories: 'loadAllCategories',
+                loadCountries: 'loadCountries'
             }),
-            ...mapActions('current', {
-                setCurrent: 'setCurrent'
+            ...mapActions('player', {
+                changeStation: 'changeStation'
             }),
             onSelect(selectedStation) {
-                this.setCurrent(selectedStation);
-                this.$router.push({name: 'play'});
+                this.changeStation(selectedStation.id)
             },
+        },
+        watch: {
+            id() {
+               if (this.id !== null){
+                   this.loadStationsFromCategory(this.id)
+               }
+            }
+        },
+        created(){
+            this.loadCountries();
+        },
+        mounted() {
+            if (this.allCategories === null) this.loadAllCategories();
+            else this.loadStationsFromCategory(this.id);
 
         }
     }

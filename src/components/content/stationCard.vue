@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
+    import {mapGetters, mapActions} from 'vuex'
     export default {
         props: {
             station: {
@@ -44,14 +44,20 @@
 
                 if (country.length > 0) return  country[0].name;
 
-
                 return this.station.country;
             }
         },
         methods: {
+            ...mapActions('data', {
+                loadCountries: 'loadCountries'
+            }),
             onClick(){
                 this.$emit('selectedRadio')
             }
+        },
+        mounted(){
+            // if (this.countries === null) this.loadCountries();
+            //вызывается каждый раз при этом хуке, проверка не работает?
         }
     }
 </script>

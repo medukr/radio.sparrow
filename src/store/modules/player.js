@@ -56,7 +56,7 @@ export default {
         },
         setUpdateSongHistoryTimer(state, payLoad){
             state.service.updateSongHistoryTimer = payLoad;
-        }
+        },
     },
     actions: {
         setStatus(store, payLoad){
@@ -80,8 +80,8 @@ export default {
                 .then(response => response.json())
                 .then(data => {
                     store.commit('setStation', data);
-                    store.dispatch('loadSongHistory');
-                    store.dispatch('loadSimilarStations');
+                    store.dispatch('loadSongHistory', payLoad);
+                    store.dispatch('loadSimilarStations', payLoad);
                 }).catch((res) => {
                     console.log('--->ERROR---> loadCurrentStation', res);
                 }
@@ -117,6 +117,10 @@ export default {
         },
         setUpdateSongHistoryTimer(store, payLoad){
             store.commit('setUpdateSongHistoryTimer', payLoad)
+        },
+        changeStation(store, id){
+                if (store.state.station === null || id !== store.state.station.id)
+                    store.dispatch('loadCurrentStation', id);
         }
     }
 

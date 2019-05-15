@@ -11,7 +11,8 @@
                         :onAirRadioStationName="onAirRadioStationName"
                         :onAirTrackImageUrl="onAirTrackImageUrl"
                         :onAirRadioStationImage="onAirRadioStationImage"
-                        :onAirCategories="onAirCategories"></app-station-single-card>
+                        :onAirCategories="onAirCategories"
+                        :onAirStationCountryName="onAirStationCountryName"></app-station-single-card>
             </div>
             <app-station-list
                     title="Похожее"
@@ -49,24 +50,24 @@
                         clearInterval(this.service.updateSongHistoryTimer)
                     );
 
-                    //обновляем список треков сразу после возвра
+                    //обновляем список треков сразу после возврата пользователя на страницу
                     this.updateSongHistory();
                     console.log('--->', 'focus UpdateSongHistory');
 
-                    //список треков обновлен, устанавливаем новый таймер обновления списка треков
+                    //список треков обновлен выше, устанавливаем новый таймер обновления списка треков
                     this.setUpdateSongHistoryTimer(
                         setInterval(() => {
                             console.log('--->', 'focus interval UpdateSongHistory');
                             this.updateSongHistory();
-                        }, 5000)
+                        }, this.timeInterval)
                     );
                 },
                 onBlurCallback : () => {
                     this.setUpdateSongHistoryTimer(
                         clearInterval(this.service.updateSongHistoryTimer));
                     console.log('--->', 'blur UpdateSongHistory');
-                }
-
+                },
+                timeInterval: 120 * 1000,
             }
         },
         computed : {
@@ -75,6 +76,10 @@
                 songHistory: "songHistory",
                 similarStations: "similarStations",
                 service: "service"
+            }),
+            ...mapGetters('data',{
+                countries: "countries",
+
             }),
             onAirSongName(){
                 if (this.station !== null && this.songHistory !== null) {
@@ -104,6 +109,35 @@
                     ? this.station.categories[0].title
                     : 'no category'
             },
+            onAirStationCountryName() {
+
+                let country = '';
+                if (this.station !== null ) {
+                    country = this.station.country;
+                    if (this.countries !== null){
+                        country = this.countries.filter((element) => {
+                            return (element.country_code === this.station.country) ? true : false
+                        })
+                    }
+
+                }
+
+                return (country[0].name !== undefined) ? country[0].name : country;
+
+                // return 'country name'
+
+                // if (this.station !== null) {
+                //     this.countryService = this.station.country;
+                //     if (this.countries !== null) {
+                //         this.getCountryName(this.station.country).then(data => {
+                //             this.countryService = data;
+                //         });
+                //
+                //     }
+                // }
+                // // console.log('--->',this.countryService);
+                // return this.countryService;
+            },
             id(){
                 return this.$route.params.id
             },
@@ -113,6 +147,11 @@
                 loadCurrentStation: 'loadCurrentStation',
                 loadSongHistory: 'loadSongHistory',
                 setUpdateSongHistoryTimer: "setUpdateSongHistoryTimer"
+            }),
+            ...mapActions('data',{
+               loadCountries: "loadCountries",
+                getCountryName: 'getCountryName'
+
             }),
             onSelect(selectedStation) {
                 if (this.station === null || selectedStation.id !== this.station.id) this.loadCurrentStation(selectedStation.id);
@@ -128,7 +167,7 @@
                     setInterval(() => {
                         console.log('--->', 'mount interval UpdateSongHistory');
                         this.updateSongHistory();
-                    }, 5000)
+                    }, this.timeInterval)
                 );
 
                 //Пользователь покинул окно, в обновлении списка треков нет необходимости
@@ -148,12 +187,16 @@
                     clearInterval(this.service.updateSongHistoryTimer));
             }
         },
+       watch: {
 
+       },
         mounted() {
             if (this.station === null || this.id !== this.station.id)
                 this.loadCurrentStation(this.id);
 
             this.enableUpdatingSongHistory();
+
+            this.loadCountries();
         },
 
         beforeDestroy() {

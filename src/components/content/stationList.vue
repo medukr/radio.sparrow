@@ -4,16 +4,17 @@
         <div class="row">
             <div class="col">
                 <template v-if="isLoaded">
-                    <app-station-card v-for="(station,index) in stations"
-                                      :station="station"
-                                      :key="(station.id + randSolt() + index)"
-                                      @selectedRadio="onSelect(station)"></app-station-card>
+                        <app-station-card
+                                v-if="!isEmpty"
+                                v-for="(station,index) in stations"
+                                          :station="station"
+                                          :key="(station.id + randSolt() + index)"
+                                          @selectedRadio="onSelect(station)"></app-station-card>
 <!--                    <v-pagination v-model="currentPage"-->
 <!--                                  :page-count="20"-->
 <!--                                  :classes="bootstrapPaginationClasses"-->
 <!--                                  :labels="customLabels"-->
 <!--                                  @change="onChange"></v-pagination>-->
-
                 </template>
                 <template v-else>
                    <app-css-load></app-css-load>
@@ -63,6 +64,9 @@
         computed: {
             isLoaded(){
                 return (this.stations) ? true : false;
+            },
+            isEmpty(){
+                return this.stations.lenght == 0 ? true : false;
             }
         },
         methods: {
@@ -78,6 +82,7 @@
                 console.log('--->', this.currentPage);
             }
         },
+
     }
 </script>
 
