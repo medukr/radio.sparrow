@@ -7,7 +7,12 @@ export default {
         countries: null,
         primaryCategories: null,
         allCategories: null,
-        stationsFromCategory: null
+        stationsFromCategory: null,
+        popStations: null,
+        danceStations: null,
+        speechStations: null,
+        electronicStations: null,
+        decadesStations: null,
     },
     getters: {
         popular(state){
@@ -27,6 +32,21 @@ export default {
         },
         stationsFromCategory(state){
             return state.stationsFromCategory;
+        },
+        popStations(state){
+            return state.popStations;
+        },
+        danceStations(state){
+            return state.danceStations;
+        },
+        speechStations(state){
+            return state.speechStations;
+        },
+        electronicStations(state){
+            return state.electronicStations;
+        },
+        decadesStations(state) {
+            return state.decadesStations;
         },
     },
     mutations: {
@@ -48,19 +68,9 @@ export default {
         loadStationsFromCategory(state, data){
             state.stationsFromCategory = data;
         },
-        // getCountryName(state, code){
-        //     let country = '';
-        //
-        //     if (state.countries !== null) {
-        //         country = state.countries.filter((element)=>{
-        //             return (element.country_code === code) ? true : false
-        //         })
-        //     }
-        //
-        //     if (country.length > 0) return  country[0].name;
-        //
-        //     return code;
-        // }
+        loadSpecialStations(state, payload){
+            state[payload.title] = payload.data;
+        }
     },
     actions: {
         loadPopular(store){
@@ -110,6 +120,8 @@ export default {
         },
         loadAllCategories(store){
             Vue.http.get('getAllCategories.php')
+            // Vue.http.get('getPrimaryCategories.php')
+
                 .then(response => response.json())
                 .then(data => {
                     store.commit('loadAllCategories', data)
@@ -119,34 +131,67 @@ export default {
             )
         },
         loadStationsFromCategory(store, payLoad){
+            /* payLoad: {
+                     title: String,
+                        id: Number
+             }*/
             Vue.http.get('getStationsFromCategory.php', {
                 params: {
-                    id: payLoad
+                    id: payLoad.id
                 }
             })
                 .then(response => response.json())
                 .then(data => {
-                    store.commit('loadStationsFromCategory', data)
+                    switch (payLoad.title) {
+                        case 'pop': store.commit('loadSpecialStations',  {
+                            title: 'popStations',
+                            data: data
+                        });
+                        break;
+                        case 'dance': store.commit('loadSpecialStations',  {
+                            title: 'danceStations',
+                            data: data
+                        });
+                        break;
+                        case 'electronic': store.commit('loadSpecialStations',  {
+                            title: 'electronicStations',
+                            data: data
+                        });
+                        break;
+                        case 'speech': store.commit('loadSpecialStations',  {
+                            title: 'speechStations',
+                            data: data
+                        });
+                        break;
+                        case 'decades': store.commit('loadSpecialStations', {
+                                title: 'decadesStations',
+                                data: data
+                            });
+                        break;
+                        default: store.commit('loadStationsFromCategory', data)
+                    }
                 }).catch((res) => {
                     console.log('--->ERROR---> loadStationsFromCategory', res);
                 }
             )
         },
-        getCountryName(store, code){
-            let country = code;
 
-            if (store.state.countries !== null) {
-                country = store.state.countries.filter((element)=>{
-                    return (element.country_code === code) ? true : false
-                })
-            }
 
-            if (country[0].name !== undefined){
-                return  country[0].name;
-            }
-
-            return code;
-        }
+        // getCountryName(store, code){
+        //     let country = code;
+        //
+        //     if (store.state.countries !== null) {
+        //         country = store.state.countries.filter((element)=>{
+        //             return (element.country_code === code) ? true : false
+        //         })
+        //     }
+        //
+        //     if (country[0].name !== undefined){
+        //         return  country[0].name;
+        //     }
+        //
+        //     return code;
+        // }
 
     }
 }

@@ -59,5 +59,12 @@
 </script>
 
 <style scoped>
-
+    .badge {
+        transition: 0.1s;
+    }
+    .badge:hover {
+        box-shadow:   0 2px 8px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.22);
+        /*background: #8445f7;*/
+        background: #7a36f6;
+    }
 </style>

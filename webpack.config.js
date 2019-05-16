@@ -56,7 +56,7 @@ module.exports = {
     hints: false
   },
   devtool: '#eval-source-map',
-  watch: true
+  // watch: true
 }
 
 if (process.env.NODE_ENV === 'production') {

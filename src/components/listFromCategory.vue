@@ -75,7 +75,10 @@
         watch: {
             id() {
                if (this.id !== null){
-                   this.loadStationsFromCategory(this.id)
+                   this.loadStationsFromCategory({
+                       title: this.slug,
+                       id: this.id
+                   })
                }
             }
         },
@@ -84,7 +87,11 @@
         },
         mounted() {
             if (this.allCategories === null) this.loadAllCategories();
-            else this.loadStationsFromCategory(this.id);
+            else this.loadStationsFromCategory({
+                title: this.slug,
+                id: this.id
+            });
+            console.log('--->', this.id);
 
         }
     }

@@ -8,6 +8,7 @@
                                 v-if="!isEmpty"
                                 v-for="(station,index) in stations"
                                           :station="station"
+                                            :colSize="colLgSize"
                                           :key="(station.id + randSolt() + index)"
                                           @selectedRadio="onSelect(station)"></app-station-card>
 <!--                    <v-pagination v-model="currentPage"-->
@@ -41,6 +42,10 @@
             },
             stations: {
                 type: Array,
+            },
+            colLgSize: {
+                type: Number,
+                default: 12
             }
         },
         data(){

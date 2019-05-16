@@ -14,15 +14,12 @@
                     <span class="text-fiord-blue">{{onAirRadioStationName}}</span>
                 </h5>
                 <p class="card-text d-inline-block mb-1">{{onAirStationCountryName}}</p>
-                <div class="progress mb-3">
+                <div class="progress mb-3" style="transform: rotate(180deg);height: 2em">
                     <div
                             class="progress-bar "
                             :class="statusBar"
                             role="progressbar"
-                            aria-valuenow="100"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                            style="width: 100%"></div>
+                            style="width: 100%;height: 100%"></div>
                 </div>
                 <p class="card-text text-muted d-inline-block mb-1">в эфире:</p>
                 <p class="card-text">{{onAirSongName}}</p>

@@ -109,12 +109,12 @@
                     ? this.station.categories[0].title
                     : 'no category'
             },
-            onAirStationCountryName() {
+            onAirStationCountryName: function () {
 
                 let country = '';
-                if (this.station !== null ) {
+                if (this.station !== null) {
                     country = this.station.country;
-                    if (this.countries !== null){
+                    if (this.countries !== null) {
                         country = this.countries.filter((element) => {
                             return (element.country_code === this.station.country) ? true : false
                         })
@@ -149,7 +149,7 @@
                 setUpdateSongHistoryTimer: "setUpdateSongHistoryTimer"
             }),
             ...mapActions('data',{
-               loadCountries: "loadCountries",
+                loadCountries: "loadCountries",
                 getCountryName: 'getCountryName'
 
             }),
@@ -187,9 +187,6 @@
                     clearInterval(this.service.updateSongHistoryTimer));
             }
         },
-       watch: {
-
-       },
         mounted() {
             if (this.station === null || this.id !== this.station.id)
                 this.loadCurrentStation(this.id);
