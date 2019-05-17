@@ -39,7 +39,7 @@
             categoryTitle(){
                 if (this.allCategories !== null) {
                     let category = this.allCategories.filter((el) => {
-                        return el.slug === this.slug ? true : false;
+                        return el.slug === this.slug;
                     });
 
                     return category[0].title;
@@ -51,7 +51,7 @@
             id(){
                 if (this.allCategories !== null) {
                     let category = this.allCategories.filter((el) => {
-                        return el.slug === this.slug ? true : false;
+                        return el.slug === this.slug;
                     });
 
                     return category[0].id;
@@ -88,10 +88,10 @@
         mounted() {
             if (this.allCategories === null) this.loadAllCategories();
             else this.loadStationsFromCategory({
-                title: this.slug,
+                title: 'nothing',
                 id: this.id
             });
-            console.log('--->', this.id);
+            console.log('LCmounted--->', this.id, this.slug);
 
         }
     }
