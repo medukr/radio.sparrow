@@ -72,9 +72,10 @@ export default {
             store.commit('setStation', payLoad);
         },
         loadCurrentStation(store, payLoad){
-            Vue.http.get('getCurrent.php', {
+            Vue.http.get('stations/specific', {
                 params: {
-                    id: payLoad
+                    id: payLoad,
+                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
                 }
             })
                 .then(response => response.json())
@@ -88,9 +89,12 @@ export default {
             )
         },
         loadSongHistory(store, payLoad){
-            Vue.http.get('getSongHistory.php', {
+            Vue.http.get('stations/song_history', {
                 params: {
-                    id: payLoad
+                    id: payLoad,
+                    page: 1,
+                    per_page: 20,
+                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
                 }
             })
                 .then(response => response.json())
@@ -102,9 +106,12 @@ export default {
             )
         },
         loadSimilarStations(store, payLoad) {
-            Vue.http.get('getSimilar.php', {
+            Vue.http.get('stations/similar', {
                 params: {
-                    id: payLoad
+                    id: payLoad,
+                    page: 1,
+                    per_page: 20,
+                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
                 }
             })
                 .then(response => response.json())

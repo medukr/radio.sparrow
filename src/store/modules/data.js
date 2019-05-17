@@ -74,7 +74,14 @@ export default {
     },
     actions: {
         loadPopular(store){
-            Vue.http.get('getPopular.php')
+            Vue.http.get('stations/popular', {
+                params: {
+                    page: 1,
+                    per_page: 20,
+                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+
+                }
+            })
                 .then(response => response.json())
                 .then(data => {
                     store.commit('loadPopular', data)
@@ -84,7 +91,13 @@ export default {
             )
         },
         loadRecent(store){
-            Vue.http.get('getRecent.php')
+            Vue.http.get('stations/recent',{
+                params: {
+                    page: 1,
+                    per_page: 20,
+                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+                }
+            })
                 .then(response => response.json())
                 .then(data => {
                     store.commit('loadRecent', data)
@@ -97,7 +110,11 @@ export default {
 
             if (store.state.countries === null) {
                 console.log('--->', 'loadCountries');
-                Vue.http.get('getCountries.php')
+                Vue.http.get('countries', {
+                    params: {
+                        token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+                    }
+                })
                     .then(response => response.json())
                     .then(data => {
                         store.commit('loadCountries', data)
@@ -109,7 +126,11 @@ export default {
 
         },
         loadPrimaryCategories(store){
-            Vue.http.get('getPrimaryCategories.php')
+            Vue.http.get('categories/primary',{
+                params: {
+                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+                }
+            })
                 .then(response => response.json())
                 .then(data => {
                     store.commit('loadPrimaryCategories', data)
@@ -119,9 +140,11 @@ export default {
             )
         },
         loadAllCategories(store){
-            Vue.http.get('getAllCategories.php')
-            // Vue.http.get('getPrimaryCategories.php')
-
+            Vue.http.get('categories', {
+                params: {
+                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+                }
+            })
                 .then(response => response.json())
                 .then(data => {
                     store.commit('loadAllCategories', data)
@@ -135,9 +158,12 @@ export default {
                      title: String,
                         id: Number
              }*/
-            Vue.http.get('getStationsFromCategory.php', {
+            Vue.http.get('categories/stations', {
                 params: {
-                    id: payLoad.id
+                    id: payLoad.id,
+                    page: 1,
+                    per_page: 20,
+                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
                 }
             })
                 .then(response => response.json())
