@@ -1,6 +1,6 @@
 <template>
     <div class="col-lg-4 col-md-6 col-sm-6 m-auto">
-        <div class="card card-small card-post card-post--1">
+        <div class="card card-small bg-custom-card-single card-post card-post--1">
             <div class="card-post__image"
                  :style="trackImage">
                 <a href="#" class="card-post__category badge badge-pill badge-success">{{onAirCategories}}</a>

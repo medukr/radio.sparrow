@@ -1,8 +1,8 @@
 <template>
 
-    <div class="main-navbar sticky-top bg-white">
-        <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
-            <div class="navbar-nav border-left flex-row">
+    <div class="main-navbar sticky-top ">
+        <nav class="navbar align-items-stretch bg-custom-navbar flex-md-nowrap p-0">
+            <div class="navbar-nav flex-row">
                 <div class="nav-item">
                     <router-link
                             :to="{name: 'home'}"
@@ -20,7 +20,7 @@
                              class="nav-link nav-link-icon text-center"
                              :class="playButtonClass">
                     <div class="nav-link-icon__wrapper">
-                        <i class="material-icons">{{playButtonIcon}}</i>
+                        <i class="material-icons m-0 p-0">{{playButtonIcon}}</i>
                     </div>
                 </router-link>
                 <div v-else class="nav-link nav-link-icon text-center text-black">
@@ -89,7 +89,7 @@
                 playButtonIcons: {
                     play: 'play_arrow',
                     pause: 'pause',
-                    loading: 'autorenew',
+                    loading: 'data_usage',
                     error: 'clear'
                 }
             }
@@ -104,5 +104,10 @@
     }
     @keyframes cssload-spin {
         100%{ transform: rotate(360deg); transform: rotate(360deg); }
+    }
+
+    i.material-icons {
+        top: 0;
+        font-size: 1.5rem;
     }
 </style>

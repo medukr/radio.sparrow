@@ -1,5 +1,5 @@
 <template>
-    <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
+    <footer class="main-footer d-flex p-2 px-3 bg-custom-footer">
         <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link" href="#">Home</a>

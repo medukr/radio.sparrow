@@ -4,11 +4,11 @@
         <div class="input-group input-group-seamless ml-3">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                    <i class="fas fa-search"></i>
+                    <i class="fa fa-search"></i>
                 </div>
             </div>
             <input
-                    class="navbar-search form-control"
+                    class="navbar-search form-control bg-transparent"
                     type="text" placeholder="Search..."
                     aria-label="Search"
                     @input="onInput">
@@ -44,4 +44,8 @@
 
 <style scoped>
 
+/*    .navbar-search {*/
+/*        background: #8445f7;*/
+/*        color: yellow;*/
+/*    }*/
 </style>

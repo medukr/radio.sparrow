@@ -96,4 +96,6 @@
         from{transform: translateX(0px)}
         to{transform: translateX(-2000px)}
     }
+
+
 </style>
