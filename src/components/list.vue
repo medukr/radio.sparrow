@@ -6,53 +6,64 @@
         <!-- End Page Header -->
         <div class="col-lg-9 col-md-9 d-inline-block">
             <app-categories-list></app-categories-list>
-            <app-station-list
-                    title="Недавно добавлены"
+            <app-list-page-station-list
+                    :title="{
+                        title: 'Недавно добавлены',
+                        slug: 'recent'
+                    }"
                     :stations="recent"
                     :colLgSize="9"
-                    @selectedRadio="onSelect"></app-station-list>
-            <app-station-list v-if="getStations('speech')"
-                    title="Разговорное и новостное радио"
+                    @selectedRadio="onSelect"></app-list-page-station-list>
+            <app-list-page-station-list v-if="getStations('speech')"
+                    :title="{
+                        title: 'Разговорное и новостное радио',
+                        slug: 'talk-speech'
+                        }"
                     :stations="getStations('speech')"
                     :colLgSize="9"
-                    @selectedRadio="onSelect"></app-station-list>
-            <app-station-list v-if="getStations('pop')"
-                    title="Поп радиостанции"
+                    @selectedRadio="onSelect"></app-list-page-station-list>
+            <app-list-page-station-list v-if="getStations('pop')"
+                    :title="{
+                        title: 'Поп радиостанции',
+                        slug: 'pop'
+                    }"
                     :stations="getStations('pop')"
                     :colLgSize="9"
-                    @selectedRadio="onSelect"></app-station-list>
-            <app-station-list v-if="getStations('dance')"
-                    title="Радио танцевальной музыки"
+                    @selectedRadio="onSelect"></app-list-page-station-list>
+            <app-list-page-station-list v-if="getStations('dance')"
+                    :title="{
+                        title: 'Радио танцевальной музыки',
+                        slug: 'dance'
+                    }"
                     :stations="getStations('dance')"
                     :colLgSize="9"
-                    @selectedRadio="onSelect"></app-station-list>
-            <app-station-list v-if="getStations('electronic')"
-                    title="Радио электронной музыки"
+                    @selectedRadio="onSelect"></app-list-page-station-list>
+            <app-list-page-station-list v-if="getStations('electronic')"
+                    :title="{
+                        title: 'Радио электронной музыки',
+                        slug: 'electronic'
+                    }"
                     :stations="getStations('electronic')"
                     :colLgSize="9"
-                    @selectedRadio="onSelect"></app-station-list>
-            <app-station-list v-if="getStations('decades')"
-                              title="Радио прошлых лет"
+                    @selectedRadio="onSelect"></app-list-page-station-list>
+            <app-list-page-station-list v-if="getStations('decades')"
+                              :title="{
+                              title: 'Радио прошлых лет',
+                              slug: 'decades'
+                              }"
                               :stations="getStations('decades')"
                               :colLgSize="9"
-                              @selectedRadio="onSelect"></app-station-list>
+                              @selectedRadio="onSelect"></app-list-page-station-list>
         </div>
         <div class="col-lg-3 col-md-3 float-right">
-            <div>
-                <div style="
-                border: 1px solid black;
-                min-height: 350px;
-                width: auto;
-                margin-bottom: 2em;
-                ">
-                    <p class="p-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, delectus dolor ducimus excepturi fugiat illum, magnam magni possimus quod, rem ullam unde veritatis voluptate! Ab adipisci beatae doloremque doloribus eos error excepturi iusto labore modi, nam nostrum quas quibusdam rerum sequi similique sit voluptate voluptatum? Architecto atque ea ratione reprehenderit!</p>
-                </div>
-            </div>
-            <app-station-list
-                    title="Часто слушают"
+            <app-list-page-station-list
+                    :title="{
+                        title: 'Часто слушают',
+                        slug: 'popular'
+                    }"
                     :stations="popular"
                     :colLgSize="3"
-                    @selectedRadio="onSelect"></app-station-list>
+                    @selectedRadio="onSelect"></app-list-page-station-list>
         </div>
     </div>
 </template>
@@ -60,7 +71,7 @@
 <script>
     import AppPageHeader from './content/pageHeader'
     import AppCategoriesList from './content/categoriesList'
-    import AppStationList from './content/stationList'
+    import AppListPageStationList from './content/listPageStationList'
 
     import {mapGetters, mapActions} from 'vuex'
 
@@ -68,7 +79,7 @@
         components: {
             AppPageHeader,
             AppCategoriesList,
-            AppStationList,
+            AppListPageStationList,
         },
         data() {
             return {

@@ -2,6 +2,7 @@ import Vue from 'vue';
 export default {
     namespaced: true,
     state: {
+        token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
         popular: null,
         recent: null,
         countries: null,
@@ -13,6 +14,7 @@ export default {
         speechStations: null,
         electronicStations: null,
         decadesStations: null,
+        queryStations: null,
     },
     getters: {
         popular(state){
@@ -48,6 +50,9 @@ export default {
         decadesStations(state) {
             return state.decadesStations;
         },
+        queryStations(state){
+            return state.queryStations;
+        }
     },
     mutations: {
         loadPopular(state, data){
@@ -70,15 +75,18 @@ export default {
         },
         loadSpecialStations(state, payload){
             state[payload.title] = payload.data;
-        }
+        },
+        loadMoreStationsFromCategory(state, data){
+            state.stationsFromCategory.push(...data);
+        },
     },
     actions: {
         loadPopular(store){
             Vue.http.get('stations/popular', {
                 params: {
                     page: 1,
-                    per_page: 20,
-                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+                    per_page: 18,
+                    token: store.state.token,
 
                 }
             })
@@ -94,8 +102,8 @@ export default {
             Vue.http.get('stations/recent',{
                 params: {
                     page: 1,
-                    per_page: 20,
-                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+                    per_page: 18,
+                    token:  store.state.token,
                 }
             })
                 .then(response => response.json())
@@ -112,7 +120,7 @@ export default {
                 console.log('--->', 'loadCountries');
                 Vue.http.get('countries', {
                     params: {
-                        token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+                        token:  store.state.token,
                     }
                 })
                     .then(response => response.json())
@@ -128,7 +136,7 @@ export default {
         loadPrimaryCategories(store){
             Vue.http.get('categories/primary',{
                 params: {
-                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+                    token:  store.state.token,
                 }
             })
                 .then(response => response.json())
@@ -142,7 +150,7 @@ export default {
         loadAllCategories(store){
             Vue.http.get('categories', {
                 params: {
-                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+                    token:  store.state.token,
                 }
             })
                 .then(response => response.json())
@@ -156,14 +164,16 @@ export default {
         loadStationsFromCategory(store, payLoad){
             /* payLoad: {
                      title: String,
-                        id: Number
+                        id: Number,
+                        page: Number,
+                        per_page: Number
              }*/
             Vue.http.get('categories/stations', {
                 params: {
                     id: payLoad.id,
                     page: 1,
-                    per_page: 20,
-                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+                    per_page: 18,
+                    token:  store.state.token,
                 }
             })
                 .then(response => response.json())
@@ -197,10 +207,51 @@ export default {
                         default: store.commit('loadStationsFromCategory', data)
                     }
                 }).catch((res) => {
+                    store.commit('loadStationsFromCategory', []);
                     console.log('--->ERROR---> loadStationsFromCategory', res);
                 }
             )
         },
+
+        loadMoreStationsFromCategory(store, payLoad){
+            /* payLoad: {              id: Number,
+                        page: Number,
+                        per_page: Number
+             }*/
+            Vue.http.get('categories/stations', {
+                params: {
+                    id: payLoad.id,
+                    page: payLoad.page,
+                    per_page: payLoad.per_page,
+                    token:  store.state.token,
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    store.commit('loadMoreStationsFromCategory', data)
+                }).catch((res) => {
+                    console.log('--->ERROR---> loadMoreStationsFromCategory', res);
+                }
+            )
+        },
+
+        loadQuery(store, payLoad){
+            Vue.http.get('stations/search', {
+                params: {
+                    query: payLoad.query,
+                    token: store.state.token,
+                }
+            }).then(response => response.json())
+                .then(data => {
+                    store.commit('loadSpecialStations', {
+                        title: 'queryStations',
+                        data: data
+                    })
+                }).catch((res) => {
+                    console.log('--->ERROR---> loadQueryStations', res);
+                }
+            )
+        }
 
 
         // getCountryName(store, code){

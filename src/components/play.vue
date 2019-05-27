@@ -17,7 +17,8 @@
             <app-station-list
                     title="Похожее"
                     :stations="similarStations"
-                    @selectedRadio="onSelect"></app-station-list>
+                    @selectedRadio="onSelect"
+           ></app-station-list>
         </template>
         <app-css-load v-else></app-css-load>
     </div>
@@ -83,7 +84,7 @@
             }),
             onAirSongName(){
                 if (this.station !== null && this.songHistory !== null) {
-                    return this.songHistory[0].title + ' : ' + this.songHistory[0].name
+                    return this.songHistory[0].name + ' - ' + this.songHistory[0].title
                 }
                return 'no name'
             },
@@ -106,7 +107,7 @@
             },
             onAirCategories(){
                 return this.station !== null
-                    ? this.station.categories[0].title
+                    ? this.station.categories
                     : 'no category'
             },
             onAirStationCountryName: function () {
@@ -156,8 +157,11 @@
             onSelect(selectedStation) {
                 if (this.station === null || selectedStation.id !== this.station.id) this.loadCurrentStation(selectedStation.id);
             },
+            onMore(){
+
+            },
             updateSongHistory(){
-                if (this.station !== null) this.loadSongHistory();
+                if (this.station !== null) this.loadSongHistory(this.station.id);
             },
             enableUpdatingSongHistory(){
 

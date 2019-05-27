@@ -2,6 +2,7 @@ import Vue from 'vue';
 export default {
     namespaced: true,
     state:{
+        token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
         status: '',
         paused: true,
         domAudio: null,
@@ -75,7 +76,7 @@ export default {
             Vue.http.get('stations/specific', {
                 params: {
                     id: payLoad,
-                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+                    token: store.state.token,
                 }
             })
                 .then(response => response.json())
@@ -94,7 +95,7 @@ export default {
                     id: payLoad,
                     page: 1,
                     per_page: 20,
-                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+                    token: store.state.token,
                 }
             })
                 .then(response => response.json())
@@ -111,7 +112,7 @@ export default {
                     id: payLoad,
                     page: 1,
                     per_page: 20,
-                    token: '85ba37970e24fb1017669c536535211695f5805c27ec640f2028527d573892bd',
+                    token: store.state.token,
                 }
             })
                 .then(response => response.json())

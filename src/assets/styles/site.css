@@ -1,6 +1,8 @@
 body {
-    /*background: #ffff00;*/
-    background: linear-gradient(to top left, powderblue, pink);
+    background-color: #ffdd13 !important
+
+    /*background: #e8dfe6;*/
+    /*background: linear-gradient(to top left, powderblue, pink);*/
 }
 
 .bg-purple {
@@ -12,7 +14,10 @@ a.bg-purple:focus, a.bg-warning:hover, button.bg-warning:focus, button.bg-warnin
 }
 
 .bg-custom-navbar {
-    background: linear-gradient(45deg, #EECFBA, #C5DDE8);
+    /*background: linear-gradient(45deg, #EECFBA, #C5DDE8);*/
+    background: linear-gradient(45deg, #e5ee05, #c9e800);
+    /*background-color: #ffdd13 !important*/
+
 }
 a.bg-custom-navbar:focus, a.bg-warning:hover, button.bg-warning:focus, button.bg-warning:hover {
     background: linear-gradient(45deg, #EECFBA, #C5DDE8);
@@ -34,7 +39,8 @@ a.bg-custom-card:focus, a.bg-warning:hover, button.bg-warning:focus, button.bg-w
 }
 
 .bg-custom-card-single {
-    background: linear-gradient(to bottom, #e6e9ee, #e8e3d7, #e8dfe6);
+    /*background: linear-gradient(to bottom, #e6e9ee, #e8e3d7, #e8dfe6);*/
+    background: linear-gradient(to bottom right, #efffff, #fff3f8);
 }
 a.bg-custom-card-single:focus, a.bg-warning:hover, button.bg-warning:focus, button.bg-warning:hover {
     background: linear-gradient(to bottom, #e6e9ee, #e8e3d7, #e8dfe6);
@@ -206,3 +212,13 @@ a.bg-yellow:focus, a.bg-warning:hover, button.bg-warning:focus, button.bg-warnin
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat; }
+
+
+.card-post--aside {
+    display: flex;
+    flex-flow: row; }
+.card-post--aside .card-post__image {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    min-width: 100px; }

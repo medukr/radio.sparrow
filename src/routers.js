@@ -9,7 +9,7 @@ import AppError from './components/error404'
 import AppSearch from './components/search'
 import AppListFromCategory from './components/listFromCategory'
 
-// import {store} from './store';
+import {store} from './store';
 
 const routes = [
 
@@ -26,12 +26,22 @@ const routes = [
     {
         name: 'listFromCategory',
         path: '/category/:slug',
-        component: AppListFromCategory
+        component: AppListFromCategory,
+        beforeEnter(from, to, next){
+                    store.commit('data/loadStationsFromCategory', null);
+                    next();
+                },
     },
     {
         name: 'search',
-        path: '/search',
-        component: AppSearch
+        path: '/search/:query',
+        component: AppSearch,
+        beforeEnter(from, to, next){
+            store.dispatch('data/loadQuery', {
+                query: from.params.query
+            });
+            next();
+        },
     },
     {
         path: '*',

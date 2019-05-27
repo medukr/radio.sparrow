@@ -1,9 +1,10 @@
 <template>
     <div class="main-content-container mb-5">
-        <h4 v-if="title">{{title}}</h4>
+        <h4 v-if="title">{{title.title}}</h4>
         <div class="row">
             <div class="col">
                 <template v-if="!!(stations)">
+                    {{stations.categories}}
                     <template  v-if="!isEmpty">
                         <app-station-card
                                 v-for="(station,index) in stations"
@@ -12,12 +13,19 @@
                                 :key="(station.id + randSolt() + index)"
                                 @selectedRadio="onSelect(station)"></app-station-card>
                         <template v-if="true">
-                            <div class="btn col-lg-2 col-md-3 col-sm-4 col-6 mb-4 d-inline-block bg-custom-card m-auto pointer-event"
-                                 @click="onClickMore()"><h5
-                                    class="navbar-link text-muted">Больше...</h5></div>
+                            <div class="row">
+                                <router-link
+                                        tag="a"
+                                        class="btn col d-inline-block bg-custom-card pointer-event mx-4"
+                                        :key="title.slug + randSolt()"
+                                        :to="{name: 'listFromCategory',
+                                                 params: {
+                                                    slug: title.slug
+                                                 }}"><h5
+                                        class="navbar-link text-muted">Больше...</h5></router-link>
+                            </div>
                         </template>
                     </template>
-                        <h5 v-else>Ничего не найдено</h5>
                 </template>
                 <template v-else>
                    <app-css-load></app-css-load>
@@ -38,7 +46,7 @@
         },
         props: {
             title: {
-                type: String
+                type: Object
             },
             stations: {
                 type: Array,

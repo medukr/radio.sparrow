@@ -49,7 +49,7 @@
 
                 if (this.countries !== null) {
                     country = this.countries.filter((element)=>{
-                        return (element.country_code === this.station.country) ? true : false
+                        return element.country_code === this.station.country
                     })
                 }
 

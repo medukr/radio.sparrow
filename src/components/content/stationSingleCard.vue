@@ -3,7 +3,19 @@
         <div class="card card-small bg-custom-card-single card-post card-post--1">
             <div class="card-post__image"
                  :style="trackImage">
-                <a href="#" class="card-post__category badge badge-pill badge-success">{{onAirCategories}}</a>
+                    <div class="m-1">
+                <router-link
+                        v-for="(onAirCategory, index) in onAirCategories"
+                        tag="a"
+                        class="badge badge-pill badge-success m-2 float-right text-uppercase "
+                        :key="onAirCategory.id + index"
+                        :to="{name: 'listFromCategory',
+                              params: {
+                                  slug: onAirCategory.slug
+                }}">
+                    {{onAirCategory.title}}
+                </router-link>
+                    </div>
                 <div class="card-post__author d-flex">
                     <div class="card-post__author-avatar"
                        :style="radioStationImage"></div>
@@ -58,7 +70,7 @@
                 default: ''  //need default image
             },
             onAirCategories: {
-                type: String,
+                type: Array,
                 default: '' //need default category
             },
             onAirStationCountryName: {

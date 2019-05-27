@@ -43,7 +43,7 @@
             }),
 
             isLoaded(){
-                return (this.allCategories) ? true : false;
+                return !!(this.allCategories);
             }
         },
         methods: {

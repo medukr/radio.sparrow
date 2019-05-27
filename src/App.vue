@@ -67,6 +67,7 @@
         animation-duration: 0.75s;
         -webkit-animation-name: bounceInUp;
         animation-name: bounceInUp;
+        opacity: 1;
     }
 
     .router-enter-to{
@@ -81,6 +82,7 @@
 
         animation: slideOut 0.5s;
         position: absolute;
+
     }
 
     .router-leave-to{

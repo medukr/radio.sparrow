@@ -4,11 +4,11 @@
         <app-page-header
                 :title="title"></app-page-header>
         <!-- End Page Header -->
-
         <app-station-list
                 :title="categoryTitle"
                 :stations="stationsFromCategory"
-                @selectedRadio="onSelect"></app-station-list>
+                @selectedRadio="onSelect"
+        @onClickMore="onMore"></app-station-list>
     </div>
 </template>
 
@@ -25,7 +25,9 @@
         },
         data() {
             return {
-                title: 'Жанры'
+                title: 'Жанры',
+                page: 1,
+                per_page: 18,
             }
         },
         computed: {
@@ -42,8 +44,9 @@
                         return el.slug === this.slug;
                     });
 
-                    return category[0].title;
+                    if (category.length > 0) return category[0].title;
                 }
+                return null;
             },
             slug(){
                 return this.$route.params.slug;
@@ -53,8 +56,7 @@
                     let category = this.allCategories.filter((el) => {
                         return el.slug === this.slug;
                     });
-
-                    return category[0].id;
+                    if (category.length > 0) return category[0].id;
                 }
                 else return null
             }
@@ -63,7 +65,8 @@
             ...mapActions('data', {
                 loadStationsFromCategory: 'loadStationsFromCategory',
                 loadAllCategories: 'loadAllCategories',
-                loadCountries: 'loadCountries'
+                loadCountries: 'loadCountries',
+                loadMoreStationsFromCategory: 'loadMoreStationsFromCategory'
             }),
             ...mapActions('player', {
                 changeStation: 'changeStation'
@@ -71,28 +74,43 @@
             onSelect(selectedStation) {
                 this.changeStation(selectedStation.id)
             },
+            onMore(){
+                this.loadMoreStationsFromCategory({
+                    id: this.id,
+                    page: ++this.page,
+                    per_page: this.per_page
+                });
+            },
+            listInitFunc(){
+                if (this.allCategories === null) this.loadAllCategories();
+                else this.loadStationsFromCategory({
+                    title: 'nothing',
+                    id: this.id,
+                    // page: this.page,
+                    // per_page: this.per_page
+                });
+                console.log('LCmounted--->', this.id, this.slug);
+            }
         },
         watch: {
-            id() {
-               if (this.id !== null){
-                   this.loadStationsFromCategory({
-                       title: this.slug,
-                       id: this.id
-                   })
-               }
+            allCategories(){
+                this.loadStationsFromCategory({
+                    title: 'nothing',
+                    id: this.id,
+                    // page: this.page,
+                    // per_page: this.per_page
+                });
             }
+
         },
         created(){
             this.loadCountries();
         },
+        activated(){
+            this.listInitFunc();
+        },
         mounted() {
-            if (this.allCategories === null) this.loadAllCategories();
-            else this.loadStationsFromCategory({
-                title: 'nothing',
-                id: this.id
-            });
-            console.log('LCmounted--->', this.id, this.slug);
-
+            this.listInitFunc();
         }
     }
 </script>

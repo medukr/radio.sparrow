@@ -1,5 +1,5 @@
 <template>
-    <form action="#" class="main-navbar__search w-100 d-none d-md-flex d-lg-flex"
+    <form action="#" class="main-navbar__search w-100 d-inline-block d-md-flex d-lg-flex"
     @submit.prevent>
         <div class="input-group input-group-seamless ml-3">
             <div class="input-group-prepend">
@@ -11,7 +11,8 @@
                     class="navbar-search form-control bg-transparent"
                     type="text" placeholder="Search..."
                     aria-label="Search"
-                    @input="onInput">
+                    @input="onInput"
+            v-model="searchQuery">
         </div>
     </form>
 </template>
@@ -22,7 +23,8 @@
         data(){
             return{
                 timer: undefined,
-                timerTimeout: 500
+                timerTimeout: 500,
+                searchQuery: ''
             }
         },
         methods: {
@@ -32,12 +34,16 @@
 
                 if (event.target.value !== ''){
                     this.timer = setTimeout(()=>{
-                        this.$router.push({name: 'search'})
+                        this.$router.push({name: 'search',
+                        params: {
+                            query: this.searchQuery
+                        }})
                     }, this.timerTimeout)
                 }
-
-
             }
+        },
+        mounted() {
+            this.searchQuery = this.$route.params.query;
         }
     }
 </script>
