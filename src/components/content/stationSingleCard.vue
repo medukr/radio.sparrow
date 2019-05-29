@@ -37,7 +37,8 @@
                 <p class="card-text">{{onAirSongName}}</p>
                 <div class="nav-link nav-link-icon text-center">
                     <div class="nav-link-icon__wrapper">
-                        <button href="#" @click="onClick" class="btn btn-primary" :disabled="disabledButton">
+                        <button href="#" @click="onClick" class="btn btn-accent btn-pill
+" :disabled="disabledButton">
                             <i class="material-icons ">{{playButton}}</i>
                         </button>
                     </div>

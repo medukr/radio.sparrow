@@ -53,14 +53,6 @@
         filter:     none !important;
     }
 
-    /*.card-post__image {*/
-    /*    min-height: 8em;*/
-    /*}*/
-
-    /*.card-post--aside .card-post__image {*/
-    /*    min-width: 8em;*/
-    /*}*/
-
     .router-enter-active{
         /*animation: slideIn 0.5s;*/
         -webkit-animation-duration: 0.75s;
@@ -80,13 +72,19 @@
 
     .router-leave-active{
 
-        animation: slideOut 0.5s;
+        /*animation: slideOut 0.5s;*/
+
+        -webkit-animation-duration: 0.5s;
+        animation-duration: 0.5s;
+        -webkit-animation-name: fadeOut;
+        animation-name: fadeOut;
         position: absolute;
+        opacity: 0;
+
 
     }
 
     .router-leave-to{
-
     }
 
 

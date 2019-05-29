@@ -1,7 +1,7 @@
 <template>
     <form action="#" class="main-navbar__search w-100 d-inline-block d-md-flex d-lg-flex"
     @submit.prevent>
-        <div class="input-group input-group-seamless ml-3">
+        <div class="input-group input-group-seamless">
             <div class="input-group-prepend">
                 <div class="input-group-text">
                     <i class="fa fa-search"></i>
@@ -34,6 +34,10 @@
 
                 if (event.target.value !== ''){
                     this.timer = setTimeout(()=>{
+                        this.$store.commit('data/loadSpecialStations', {
+                            title: 'queryStations',
+                            data: null
+                        });
                         this.$router.push({name: 'search',
                         params: {
                             query: this.searchQuery

@@ -7,18 +7,23 @@
         <!-- End Page Header -->
         <template v-if="!!(queryStations)">
             <template v-if="!isEmpty">
-            <div class="row">
-                <template v-for="station in queryStations">
-                    <app-station-card-aside
-                            :station="station"
-                            @selectedRadio="onSelect(station)"></app-station-card-aside>
-                </template>
-            </div>
+                <transition name="search">
+                    <div class="row">
+                        <template v-for="station in queryStations">
+                            <app-station-card-aside
+                                    :station="station"
+                                    @selectedRadio="onSelect(station)"
+                            ></app-station-card-aside>
+                        </template>
+                    </div>
+                </transition>
             </template>
             <h5 v-else>Ничего не найдено</h5>
         </template>
         <template v-else>
-            <app-css-load></app-css-load>
+            <transition name="search">
+                <app-css-load></app-css-load>
+            </transition>
         </template>
     </div>
 </template>
@@ -73,5 +78,24 @@
 </script>
 
 <style scoped>
+    .search-enter-active{
+        /*animation: slideIn 0.5s;*/
+        -webkit-animation-duration: 0.75s;
+        animation-duration: 0.75s;
+        -webkit-animation-name: bounceInUp;
+        animation-name: bounceInUp;
+        /*opacity: 1;*/
+    }
 
+    .search-leave-active{
+
+        /*animation: slideOut 0.5s;*/
+
+        -webkit-animation-duration: 0.5s;
+        animation-duration: 0.5s;
+        -webkit-animation-name: fadeOut;
+        animation-name: fadeOut;
+        position: absolute;
+
+    }
 </style>

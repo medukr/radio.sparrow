@@ -4,7 +4,7 @@
         <app-page-header
                 :title="title"></app-page-header>
         <!-- End Page Header -->
-        <template v-if="station !== null">
+        <template v-if="!!(station)">
             <div class="mb-5">
                 <app-station-single-card
                         :onAirSongName="onAirSongName"
@@ -117,7 +117,7 @@
                     country = this.station.country;
                     if (this.countries !== null) {
                         country = this.countries.filter((element) => {
-                            return (element.country_code === this.station.country) ? true : false
+                            return element.country_code === this.station.country
                         })
                     }
 

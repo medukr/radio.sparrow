@@ -72,18 +72,22 @@ export default {
         setStation(store, payLoad){
             store.commit('setStation', payLoad);
         },
-        loadCurrentStation(store, payLoad){
+        loadCurrentStation(store, id){
             Vue.http.get('stations/specific', {
                 params: {
-                    id: payLoad,
+                    id: id,
                     token: store.state.token,
                 }
             })
                 .then(response => response.json())
                 .then(data => {
-                    store.commit('setStation', data);
-                    store.dispatch('loadSongHistory', payLoad);
-                    store.dispatch('loadSimilarStations', payLoad);
+                    if  (!!data){
+                        store.commit('setStation', data);
+                        store.dispatch('loadSongHistory', data.id);
+                        store.dispatch('loadSimilarStations', data.id);
+                    }else {
+                        console.log('--->Not Found---> loadCurrentStation');
+                    }
                 }).catch((res) => {
                     console.log('--->ERROR---> loadCurrentStation', res);
                 }
