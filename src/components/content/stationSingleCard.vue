@@ -28,7 +28,7 @@
                 <p class="card-text d-inline-block mb-1">{{onAirStationCountryName}}</p>
                 <div class="progress mb-3" style="transform: rotate(180deg);height: 2em">
                     <div
-                            class="progress-bar "
+                            class="progress-bar"
                             :class="statusBar"
                             role="progressbar"
                             style="width: 100%;height: 100%"></div>
@@ -86,7 +86,7 @@
                     playing: 'progress-bar-striped progress-bar-animated bg-success',
                     pause: 'progress-bar-striped progress-bar bg-success',
                     waiting: 'progress-bar-striped progress-bar-animated bg-warning',
-                    error: 'bg-danger'
+                    error: 'bg-danger progress-custom-danger'
                 },
                 playButtonStyles: {
                     play: 'play_arrow',
@@ -159,4 +159,5 @@
 .card-post__image {
     min-height: 16rem;
 }
+
 </style>

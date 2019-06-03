@@ -1,8 +1,10 @@
 body {
-    background-color: #ffdd13 !important
-
+    /*background-color: #ffdd13 !important*/
     /*background: #e8dfe6;*/
-    /*background: linear-gradient(to top left, powderblue, pink);*/
+
+
+
+    background: linear-gradient(to top left, powderblue, pink);
 }
 
 .bg-purple {
@@ -14,9 +16,12 @@ a.bg-purple:focus, a.bg-warning:hover, button.bg-warning:focus, button.bg-warnin
 }
 
 .bg-custom-navbar {
-    /*background: linear-gradient(45deg, #EECFBA, #C5DDE8);*/
+    background: linear-gradient(45deg, #EECFBA, #C5DDE8);
+
+
+
     /*background: linear-gradient(45deg, #e5ee05, #c9e800);*/
-    background-color: #ffce1b !important
+    /*background-color: #ffce1b !important*/
 
 }
 a.bg-custom-navbar:focus, a.bg-warning:hover, button.bg-warning:focus, button.bg-warning:hover {

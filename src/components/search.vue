@@ -7,7 +7,7 @@
         <!-- End Page Header -->
         <template v-if="!!(queryStations)">
             <template v-if="!isEmpty">
-                <transition name="search">
+                <transition name="elements">
                     <div class="row">
                         <template v-for="station in queryStations">
                             <app-station-card-aside
@@ -21,7 +21,7 @@
             <h5 v-else>Ничего не найдено</h5>
         </template>
         <template v-else>
-            <transition name="search">
+            <transition name="elements">
                 <app-css-load></app-css-load>
             </transition>
         </template>
@@ -78,24 +78,5 @@
 </script>
 
 <style scoped>
-    .search-enter-active{
-        /*animation: slideIn 0.5s;*/
-        -webkit-animation-duration: 0.75s;
-        animation-duration: 0.75s;
-        -webkit-animation-name: bounceInUp;
-        animation-name: bounceInUp;
-        /*opacity: 1;*/
-    }
 
-    .search-leave-active{
-
-        /*animation: slideOut 0.5s;*/
-
-        -webkit-animation-duration: 0.5s;
-        animation-duration: 0.5s;
-        -webkit-animation-name: fadeOut;
-        animation-name: fadeOut;
-        position: absolute;
-
-    }
 </style>

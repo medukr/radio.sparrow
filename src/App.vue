@@ -44,6 +44,8 @@
 </script>
 
 <style>
+    @import "/src/assets/styles/animate.css";
+
     [debug], [debug] *:not(g):not(path) {
         color:                 hsla(210, 100%, 100%, 0.9) !important;
         background:            hsla(210, 100%,  50%, 0.5) !important;
@@ -85,6 +87,25 @@
     }
 
     .router-leave-to{
+    }
+
+
+    .elements-enter-active{
+        /*animation: slideIn 0.5s;*/
+        -webkit-animation-duration: 0.75s;
+        animation-duration: 0.75s;
+        -webkit-animation-name: bounceInUp;
+        animation-name: bounceInUp;
+        /*opacity: 1;*/
+    }
+
+    .elements-leave-active{
+        /*animation: slideOut 0.5s;*/
+        -webkit-animation-duration: 0.5s;
+        animation-duration: 0.5s;
+        -webkit-animation-name: fadeOut;
+        animation-name: fadeOut;
+        position: absolute;
     }
 
 

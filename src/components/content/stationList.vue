@@ -4,23 +4,25 @@
         <div class="row">
             <div class="col">
                 <template v-if="!!(stations)">
-                    <template  v-if="!isEmpty">
+                    <template v-if="!isEmpty">
                         <app-station-card
                                 v-for="(station,index) in stations"
                                 :station="station"
                                 :colSize="colLgSize"
                                 :key="(station.id + randSolt() + index)"
-                                @selectedRadio="onSelect(station)"></app-station-card>
+                                @selectedRadio="onSelect(station)">
+                        </app-station-card>
                         <template v-if="true">
                             <div class="btn col-lg-2 col-md-3 col-sm-4 col-6 mb-4 d-inline-block bg-custom-card m-auto pointer-event"
-                                 @click="onClickMore()"><h5
-                                    class="navbar-link text-muted">Больше...</h5></div>
+                                 @click="onClickMore()">
+                                <h5 class="navbar-link text-muted">Больше...</h5>
+                            </div>
                         </template>
                     </template>
-                        <h5 v-else>Ничего не найдено</h5>
+                    <h5 v-else>Ничего не найдено</h5>
                 </template>
                 <template v-else>
-                   <app-css-load></app-css-load>
+                    <app-css-load></app-css-load>
                 </template>
             </div>
         </div>
@@ -48,12 +50,11 @@
                 default: 12
             }
         },
-        data(){
-            return {
-            }
+        data() {
+            return {}
         },
         computed: {
-            isEmpty(){
+            isEmpty() {
                 return this.stations.length === 0;
             }
         },
@@ -61,14 +62,13 @@
             onSelect(station) {
                 this.$emit('selectedRadio', station)
             },
-            randSolt(){
+            randSolt() {
                 return Math.floor(Math.random() * Math.floor(10000)).toString();
             },
-            onClickMore(){
+            onClickMore() {
                 this.$emit('onClickMore')
             }
         },
-
     }
 </script>
 
