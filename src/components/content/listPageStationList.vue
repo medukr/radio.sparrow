@@ -40,7 +40,7 @@
     import AppCssLoad from './cssLoad'
 
     export default {
-        components: {
+            components: {
             AppStationCard,
             AppCssLoad,
         },

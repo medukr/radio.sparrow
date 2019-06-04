@@ -56,9 +56,20 @@
                 this.setStatus('error')
             });
 
-            this.domAudio.addEventListener('stalled', () => {
-                this.setStatus('loading')
-            });
+
+            //Есть необходимость отлавливать ошибки соединения плейра, и обрабатывать их
+            // window.addEventListener('connect_error', () => {
+            //    console.log('--->', 'window.onabort');
+            // });
+            //
+            // this.domAudio.addEventListener('connect_error', () => {
+            //     console.log('--->', 222222);
+            //     this.setStatus('error')
+            // });
+            //
+            // this.domAudio.addEventListener('stalled', () => {
+            //     this.setStatus('loading')
+            // });
 
 
             this.domAudio.autoplay = true;

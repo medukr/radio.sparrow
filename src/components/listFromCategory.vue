@@ -49,10 +49,14 @@
                 return null;
             },
             slug(){
-                return this.$route.params.slug;
+                   return this.$route.params.slug;
             },
             id(){
-                if (this.allCategories !== null) {
+                if (this.slug === 'recent' || this.slug === 'popular'){
+                    //это такой себе костыль для унификации сейчас, и проблем потом при доработке приложения
+                    if (this.slug === 'recent') return -1;
+                    else return -2;
+                }else if (this.allCategories !== null) {
                     let category = this.allCategories.filter((el) => {
                         return el.slug === this.slug;
                     });

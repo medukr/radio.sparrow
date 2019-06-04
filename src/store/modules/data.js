@@ -208,7 +208,6 @@ export default {
                     }
                 }).catch((res) => {
                     store.commit('loadStationsFromCategory', []);
-                    console.log('--->ERROR---> loadStationsFromCategory', res);
                 }
             )
         },
