@@ -62,7 +62,7 @@ a.bg-yellow:focus, a.bg-warning:hover, button.bg-warning:focus, button.bg-warnin
 
 
 .card {
-    min-height: 10rem;
+    height: 100%;
     background-color: #fff;
     border: none;
     border-radius: 0.25rem;
@@ -227,3 +227,8 @@ a.bg-yellow:focus, a.bg-warning:hover, button.bg-warning:focus, button.bg-warnin
     border-top-left-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem;
     min-width: 100px; }
+
+.row-flex {
+    display: flex;
+    flex-wrap: wrap;
+}

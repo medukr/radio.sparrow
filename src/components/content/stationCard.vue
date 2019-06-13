@@ -4,7 +4,7 @@
             <div class="card-post__image"
                  :style="radioStationImage">
             </div>
-            <div class="text-center px-1 py-1">
+            <div class="text-center p-1 my-auto">
                 <p class="text-fiord-blue mb-0">{{station.name}}</p>
                 <span class="text-muted">{{country}}</span>
             </div>
