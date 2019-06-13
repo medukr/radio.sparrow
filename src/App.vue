@@ -26,6 +26,8 @@
     import appMainNavbar from './components/main-navbar';
     import Radio from './components/content/audioPlayer'
 
+    import {mapActions} from 'vuex'
+
     export default {
         name: 'app',
         components: {
@@ -39,6 +41,17 @@
                 enterActiveClass: 'animated bounceLeft ',
                 leaveActiveClass: 'animated bounceOutLeft'
             }
+        },
+        methods:{
+            ...mapActions('service', {
+                setScrollTop: "setScrollTop"
+            })
+        },
+        mounted(){
+            //Инициализируем расчет позиции нижней стороны окна для ленивой загрузки лого станций
+          window.addEventListener('scroll', () => {
+              this.setScrollTop(window.pageYOffset + window.innerHeight);
+          })
         }
     }
 </script>

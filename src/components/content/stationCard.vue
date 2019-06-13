@@ -31,7 +31,8 @@
                     'col-12-classes' : ['col col-lg-2 col-md-3 col-sm-4 col-6 mb-4 d-inline-block'],
                     'col-9-classes' : ['col col-lg-2 col-md-3 col-sm-4 col-6 mb-4 d-inline-block'],
                     'col-3-classes' : ['col col-lg-6 col-md-12 col-sm-4 col-6 mb-4 d-inline-block'],
-                }
+                },
+                showImage: false
             }
         },
 
@@ -39,10 +40,20 @@
             ...mapGetters('data',{
                 countries: 'countries'
             }),
+            ...mapGetters('service',{
+                scrollTop: 'scrollTop'
+            }),
             radioStationImage(){
-                return this.station.image.url !== null
-                    ? "background-image: url('" + this.station.image.url + "');"
-                    : "background-image: url('/src/assets/images/radio_logo/noimage.png');"
+                return "background-image: url('" + this.lazyImageUrl + "');"
+
+            },
+            lazyImageUrl(){
+                if (this.station.image.url !== null) {
+                    return this.showImage === true
+                        ? this.station.image.url
+                        : '/src/assets/images/radio_logo/noimage.png'
+                }
+                return '/src/assets/images/radio_logo/noimage.png';
             },
             country(){
                 let country = '';
@@ -67,11 +78,24 @@
             }),
             onClick(){
                 this.$emit('selectedRadio')
+            },
+            //Расчет момента загрузки лого станции
+            checkScroll(){
+                if ((this.scrollTop + 200) > this.$el.offsetTop)  this.showImage = true;
+            }
+        },
+        watch: {
+            scrollTop(){
+               this.checkScroll();
             }
         },
         mounted(){
             // if (this.countries === null) this.loadCountries();
             //вызывается каждый раз при этом хуке, проверка не работает?
+
+
+
+            this.checkScroll();
         }
     }
 </script>

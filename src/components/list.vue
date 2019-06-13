@@ -148,22 +148,22 @@
             }
         },
         created() {
-            this.loadPopular();
-            this.loadRecent();
-            this.loadCountries();
-            // Object.defineProperty(this, stationFMP, {})
-            // console.log('--->', this.stationsForMainPage);
+
+            if (this.popular === null) this.loadPopular();
+            if (this.recent  === null) this.loadRecent();
+            if (this.allCategories  === null) this.loadCountries();
 
         },
         mounted() {
             for (let station in this.stationsForMainPage) {
-                this.loadStationsFromCategory({
-                    title: station,
-                    id: this.stationsForMainPage[station].id
-                });
+                if (this[this.stationsForMainPage[station].propName] === null) {
+                    this.loadStationsFromCategory({
+                        title: station,
+                        id: this.stationsForMainPage[station].id
+                    });
+                }
             }
-
-        },
+        }
     }
 </script>
 
