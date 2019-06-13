@@ -4,11 +4,13 @@
         <app-page-header
                 :title="title"></app-page-header>
         <!-- End Page Header -->
+        <div class="col">
         <app-station-list
                 :title="categoryTitle"
                 :stations="stationsFromCategory"
                 @selectedRadio="onSelect"
         @onClickMore="onMore"></app-station-list>
+        </div>
     </div>
 </template>
 

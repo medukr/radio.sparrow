@@ -3,8 +3,7 @@
         <h4 v-if="title">{{title.title}}</h4>
         <div class="row">
                 <template v-if="!!(stations)">
-                    {{stations.categories}}
-                    <template  v-if="!isEmpty">
+                    <template v-if="!isEmpty">
                         <app-station-card
                                 v-for="(station,index) in stations"
                                 :station="station"

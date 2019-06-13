@@ -2,7 +2,6 @@
     <div class="main-content-container mb-5">
         <h4 v-if="title">{{title}}</h4>
         <div class="row">
-            <div class="col">
                 <template v-if="!!(stations)">
                     <template v-if="!isEmpty">
                         <app-station-card
@@ -24,7 +23,6 @@
                 <template v-else>
                     <app-css-load></app-css-load>
                 </template>
-            </div>
         </div>
     </div>
 </template>
