@@ -26,7 +26,9 @@
                     </template>
                 </template>
                 <template v-else>
+                    <transition name="elements">
                    <app-css-load></app-css-load>
+                    </transition>
                 </template>
         </div>
     </div>

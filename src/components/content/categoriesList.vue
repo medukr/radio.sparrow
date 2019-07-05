@@ -2,11 +2,11 @@
     <div class="main-content-container mb-5">
         <h4>Жанры</h4>
         <div class="row">
-                <template v-if="isLoaded">
-                    <div v-for="category in allCategories">
-<!--                         class="col-lg-2 col-md-4 col-sm-6 d-flex justify-content-center"-->
-
+            <template v-if="isLoaded">
+                <transition name="elements">
+                    <div class="col-12">
                         <router-link
+                                v-for="category in allCategories"
                                 tag="a"
                                 :to="{
                                           name:'listFromCategory',
@@ -14,15 +14,19 @@
                                               slug: category.slug
                                                   }
                                           }"
-                                :key="category.id">
+                                :key="category.id + '1'"
+                        >
                                         <span class="badge badge-pill badge-info m-1">
                                             {{category.title}}
                                         </span>
                         </router-link>
                     </div>
-                </template>
+                </transition>
+            </template>
             <template v-else>
-                <app-css-load></app-css-load>
+                <transition name="elements">
+                    <app-css-load></app-css-load>
+                </transition>
             </template>
         </div>
     </div>
@@ -39,19 +43,19 @@
         },
         computed: {
             ...mapGetters('data', {
-                primaryCategories:'primaryCategories',
+                primaryCategories: 'primaryCategories',
                 allCategories: 'allCategories'
             }),
 
-            isLoaded(){
+            isLoaded() {
                 return !!(this.allCategories);
             }
         },
         methods: {
-          ...mapActions('data',{
-              loadPrimaryCategories: 'loadPrimaryCategories',
-              loadAllCategories: 'loadAllCategories'
-          })
+            ...mapActions('data', {
+                loadPrimaryCategories: 'loadPrimaryCategories',
+                loadAllCategories: 'loadAllCategories'
+            })
         },
         created() {
             this.loadAllCategories();
@@ -63,9 +67,11 @@
     .badge {
         transition: 0.1s;
     }
+
     .badge:hover {
-        box-shadow:   0 2px 8px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.22);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.22);
         /*background: #8445f7;*/
         background: #7a36f6;
     }
+
 </style>

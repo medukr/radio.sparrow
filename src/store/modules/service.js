@@ -1,7 +1,7 @@
 export default {
     namespaced: true,
     state: {
-        scrollTop: 0
+        scrollTop: window.pageYOffset + window.innerHeight
     },
     getters: {
         scrollTop(state){

@@ -72,8 +72,8 @@
         /*animation: slideIn 0.5s;*/
         -webkit-animation-duration: 0.75s;
         animation-duration: 0.75s;
-        -webkit-animation-name: bounceInUp;
-        animation-name: bounceInUp;
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
         opacity: 1;
     }
 
@@ -107,8 +107,8 @@
         /*animation: slideIn 0.5s;*/
         -webkit-animation-duration: 0.75s;
         animation-duration: 0.75s;
-        -webkit-animation-name: bounceInUp;
-        animation-name: bounceInUp;
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
         /*opacity: 1;*/
     }
 
