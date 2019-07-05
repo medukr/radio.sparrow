@@ -74,7 +74,7 @@
         animation-duration: 0.75s;
         -webkit-animation-name: fadeIn;
         animation-name: fadeIn;
-        opacity: 1;
+        /*opacity: 1;*/
     }
 
     .router-enter-to{
@@ -94,7 +94,7 @@
         -webkit-animation-name: fadeOut;
         animation-name: fadeOut;
         position: absolute;
-        opacity: 0;
+        /*opacity: 0;*/
 
 
     }

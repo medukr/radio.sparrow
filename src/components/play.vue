@@ -18,7 +18,7 @@
                     title="Похожее"
                     :stations="similarStations"
                     @selectedRadio="onSelect"
-           ></app-station-list>
+            ></app-station-list>
         </template>
         <app-css-load v-else></app-css-load>
     </div>
@@ -40,10 +40,10 @@
             AppCssLoad,
             AppStationList
         },
-        data(){
+        data() {
             return {
                 title: 'Сейчас играет',
-                onFocusCallback : () => {
+                onFocusCallback: () => {
                     //Пользователь ранее покинул окно, и отработал ивент blur, который должен был
                     //удалить таймер. Если по какой-либо причине таймер не удалился, повторяем
                     //удаление таймера, так как тот таймер уже не нужен, и будет лишним
@@ -63,7 +63,7 @@
                         }, this.timeInterval)
                     );
                 },
-                onBlurCallback : () => {
+                onBlurCallback: () => {
                     this.setUpdateSongHistoryTimer(
                         clearInterval(this.service.updateSongHistoryTimer));
                     console.log('--->', 'blur UpdateSongHistory');
@@ -71,41 +71,41 @@
                 timeInterval: 120 * 1000,
             }
         },
-        computed : {
+        computed: {
             ...mapGetters('player', {
                 station: 'station',
                 songHistory: "songHistory",
                 similarStations: "similarStations",
                 service: "service"
             }),
-            ...mapGetters('data',{
+            ...mapGetters('data', {
                 countries: "countries",
 
             }),
-            onAirSongName(){
+            onAirSongName() {
                 if (this.station !== null && this.songHistory !== null) {
                     return this.songHistory[0].name + ' - ' + this.songHistory[0].title
                 }
-               return 'no name'
+                return 'no name'
             },
-            onAirRadioStationName(){
+            onAirRadioStationName() {
                 return this.station !== null
                     ? this.station.name
                     : 'no station'
             },
-            onAirTrackImageUrl(){
+            onAirTrackImageUrl() {
                 if (this.station !== null && this.songHistory !== null) {
-                    if ( this.songHistory[0].info !== null && this.songHistory[0].info.image.url !== null)
+                    if (this.songHistory[0].info !== null && this.songHistory[0].info.image.url !== null)
                         return this.songHistory[0].info.image.url
                 }
                 return '/src/assets/images/radio_logo/no-track-image.png'
             },
-            onAirRadioStationImage(){
+            onAirRadioStationImage() {
                 return (this.station !== null && this.station.image.url !== null)
                     ? this.station.image.url
                     : '/src/assets/images/radio_logo/noimage.png'
             },
-            onAirCategories(){
+            onAirCategories() {
                 return this.station !== null
                     ? this.station.categories
                     : 'no category'
@@ -139,31 +139,34 @@
                 // // console.log('--->',this.countryService);
                 // return this.countryService;
             },
-            id(){
+            id() {
                 return this.$route.params.id
             },
         },
         methods: {
-            ...mapActions('player',{
+            ...mapActions('player', {
                 loadCurrentStation: 'loadCurrentStation',
                 loadSongHistory: 'loadSongHistory',
                 setUpdateSongHistoryTimer: "setUpdateSongHistoryTimer"
             }),
-            ...mapActions('data',{
+            ...mapActions('data', {
                 loadCountries: "loadCountries",
                 getCountryName: 'getCountryName'
 
             }),
+            ...mapActions('service', {
+                scrollToTop: 'scrollToTop'
+            }),
             onSelect(selectedStation) {
                 if (this.station === null || selectedStation.id !== this.station.id) this.loadCurrentStation(selectedStation.id);
             },
-            onMore(){
+            onMore() {
 
             },
-            updateSongHistory(){
+            updateSongHistory() {
                 if (this.station !== null) this.loadSongHistory(this.station.id);
             },
-            enableUpdatingSongHistory(){
+            enableUpdatingSongHistory() {
 
                 // в момент срабатывания хука mount запрос на историю треков уже отправлен
                 //поэтому только устанавливаем таймер на обновление
@@ -182,16 +185,21 @@
                 window.addEventListener('focus', this.onFocusCallback);
 
             },
-            disableUpdatingSongHistory(){
+            disableUpdatingSongHistory() {
 
                 window.removeEventListener('focus', this.onFocusCallback);
                 window.removeEventListener('blur', this.onBlurCallback);
 
                 this.setUpdateSongHistoryTimer(
                     clearInterval(this.service.updateSongHistoryTimer));
-            }
+            },
+
+
+
         },
         mounted() {
+            this.scrollToTop();
+
             if (this.station === null || this.id !== this.station.id)
                 this.loadCurrentStation(this.id);
 

@@ -63,6 +63,9 @@
             ...mapActions('player', {
                 changeStation: 'changeStation'
             }),
+            ...mapActions('service', {
+                scrollToTop: 'scrollToTop'
+            }),
             onSelect(selectedStation) {
                 this.changeStation(selectedStation.id);
             },
@@ -74,6 +77,9 @@
             });
             next();
         },
+        mounted() {
+            this.scrollToTop()
+        }
     }
 </script>
 
