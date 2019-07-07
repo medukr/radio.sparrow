@@ -45,7 +45,7 @@
             });
 
             this.domAudio.addEventListener('playing', () => {
-                this.setStatus('play')
+                this.setStatus('play');
             });
 
             this.domAudio.addEventListener('loadstart', () => {

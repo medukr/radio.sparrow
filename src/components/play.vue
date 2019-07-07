@@ -194,8 +194,6 @@
                     clearInterval(this.service.updateSongHistoryTimer));
             },
 
-
-
         },
         mounted() {
             this.scrollToTop();
@@ -210,7 +208,6 @@
 
         beforeDestroy() {
             this.disableUpdatingSongHistory();
-
         }
     }
 </script>

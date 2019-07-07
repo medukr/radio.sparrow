@@ -49,8 +49,8 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true,
     overlay: true,
-    host: '172.17.30.107',
-    port: '3030',
+    // host: '172.17.30.107',
+    // port: '3030',
   },
   performance: {
     hints: false

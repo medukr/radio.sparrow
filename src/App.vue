@@ -26,10 +26,9 @@
     import appMainNavbar from './components/main-navbar';
     import Radio from './components/content/audioPlayer'
 
-    import {mapActions} from 'vuex'
+    import {mapActions, mapGetters} from 'vuex'
 
     export default {
-        name: 'app',
         components: {
             appMainSidebar,
             AppFooter,
@@ -42,10 +41,30 @@
                 leaveActiveClass: 'animated bounceOutLeft'
             }
         },
+        computed: {
+            ...mapGetters('service', {
+                documentTitle: "documentTitle"
+            }),
+            ...mapGetters('player', {
+                playerStatus: 'status',
+                station: 'station'
+            })
+        },
         methods:{
             ...mapActions('service', {
-                setScrollTop: "setScrollTop"
+                setScrollTop: "setScrollTop",
+                setDocumentTitle: "setDocumentTitle"
             })
+        },
+        watch: {
+            playerStatus(){
+                switch (this.playerStatus) {
+                    case 'play' :this.setDocumentTitle('Play - ' + this.station.name);
+                    break;
+                    case 'pause' :this.setDocumentTitle('Pause - ' + this.station.name);
+                    break;
+                }
+            }
         },
         mounted(){
             //Инициализируем расчет позиции нижней стороны окна для ленивой загрузки лого станций

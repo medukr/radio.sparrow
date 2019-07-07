@@ -1,16 +1,25 @@
 export default {
     namespaced: true,
     state: {
-        scrollTop: window.pageYOffset + window.innerHeight
+        scrollTop: window.pageYOffset + window.innerHeight,
+        documentTitle: 'Radio.Sparrow'
     },
     getters: {
         scrollTop(state){
             return state.scrollTop;
-        }
+        },
+       documentTitle(state){
+          return state.documentTitle;
+        },
     },
     mutations:{
         setScrollTop(state, data){
             state.scrollTop = data;
+        },
+        setDocumentTitle(state, data){
+            state.documentTitle = data;
+            document.querySelector('head title').innerHTML = data;
+            // document.body.title. = data;
         },
         animateScrollToTop(state, data) {
             if (window.scrollY > 0)
@@ -23,6 +32,9 @@ export default {
     actions:{
         setScrollTop(store, data){
             store.commit('setScrollTop', data)
+        },
+        setDocumentTitle(store, data) {
+            store.commit('setDocumentTitle', data);
         },
         scrollToTop(store, data = {timeout: 1000, step: 20, time: 100}){
             if (window.scrollY > 0) {
