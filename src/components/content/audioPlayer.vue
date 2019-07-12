@@ -20,7 +20,8 @@
         computed: {
             ...mapGetters('player', {
                 paused: 'paused',
-                station: 'station'
+                station: 'station',
+                status: "status"
             }),
             src(){
                 return this.station !== null ?  this.station.streams[0].stream : null;
@@ -36,9 +37,23 @@
                 setDomAudio: 'setDomAudio',
                 setPaused: 'setPaused'
             }),
+
+            pressSpace(){
+                document.addEventListener('keydown', (e) => {
+
+                    if (e.code === 'Space' && this.status !== '' && this.status !== 'loading'){
+                        e.preventDefault();
+                        this.domAudio.paused ? this.domAudio.play() : this.domAudio.pause();
+                    }
+
+                });
+            }
+
         },
         mounted() {
             this.domAudio = this.$vnode.elm;
+
+            this.domAudio.autoplay = true;
 
             this.domAudio.addEventListener('pause', () => {
                 this.setStatus('pause')
@@ -56,6 +71,8 @@
                 this.setStatus('error')
             });
 
+            this.pressSpace();
+
 
             //Есть необходимость отлавливать ошибки соединения плейра, и обрабатывать их
             // window.addEventListener('connect_error', () => {
@@ -71,8 +88,6 @@
             //     this.setStatus('loading')
             // });
 
-
-            this.domAudio.autoplay = true;
 
         },
         updated() {

@@ -61,6 +61,11 @@ a.bg-yellow:focus, a.bg-warning:hover, button.bg-warning:focus, button.bg-warnin
 }
 
 
+#main-content-wrapper {
+    max-width: 1440px;
+}
+
+
 .card {
     height: 100%;
     background-color: #fff;

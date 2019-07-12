@@ -2,21 +2,21 @@
     <div class="h-100">
         <div class="container-fluid">
             <div class="row">
-                <main class="main-content col-12 p-0">
-                        <!-- Main Navbar -->
-                        <app-main-navbar></app-main-navbar>
+                <main class="col-12 p-0">
+                    <!-- Main Navbar -->
+                    <app-main-navbar></app-main-navbar>
                     <!-- / .main-navbar -->
-                    <div class="col-xl-10 col-12 m-auto">
-                    <keep-alive>
-                        <transition name="router">
-                            <router-view></router-view>
-                        </transition>
-                    </keep-alive>
+                    <div id="main-content-wrapper" class="main-content m-auto">
+                        <keep-alive>
+                            <transition name="router">
+                                <router-view></router-view>
+                            </transition>
+                        </keep-alive>
                     </div>
                 </main>
-                <main class="main-content col-12 p-0">
+                <div class="col-12 p-0">
                     <app-footer></app-footer>
-                </main>
+                </div>
             </div>
         </div>
     </div>
@@ -140,16 +140,6 @@
         -webkit-animation-name: fadeOut;
         animation-name: fadeOut;
         position: absolute;
-    }
-
-
-    @keyframes slideIn {
-        from{transform: translateX(-2000px)}
-        to{transform: translateX(0px)}
-    }
-    @keyframes slideOut {
-        from{transform: translateX(0px)}
-        to{transform: translateX(-2000px)}
     }
 
 

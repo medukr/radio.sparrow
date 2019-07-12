@@ -1,5 +1,4 @@
 <template>
-
     <div class="main-navbar sticky-top ">
         <nav class="navbar align-items-stretch bg-custom-navbar flex-md-nowrap p-0">
             <div class="navbar-nav flex-row">
@@ -31,7 +30,9 @@
             </div>
             <radio></radio>
             <app-search-form></app-search-form>
+
         </nav>
+        <app-scroll-to-top></app-scroll-to-top>
     </div>
 </template>
 
@@ -39,6 +40,7 @@
     import Radio from './content/audioPlayer'
     import AppSearchForm from './content/searchForm'
     import AppCssLoad from './content/cssLoad'
+    import AppScrollToTop from './content/scrollToTop'
 
     import {mapGetters} from 'vuex'
 
@@ -48,7 +50,8 @@
         components: {
             Radio,
             AppSearchForm,
-            AppCssLoad
+            AppCssLoad,
+            AppScrollToTop
         },
         computed: {
             ...mapGetters('player', {
