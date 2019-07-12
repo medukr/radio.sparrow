@@ -4,7 +4,7 @@
         <app-page-header
                 :title="title"></app-page-header>
         <!-- End Page Header -->
-        <div class="col">
+        <div class="col-12">
         <app-station-list
                 :title="categoryTitle"
                 :stations="stationsFromCategory"

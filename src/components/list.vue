@@ -4,7 +4,7 @@
         <app-page-header
         :title="title"></app-page-header>
         <!-- End Page Header -->
-        <div class="col-lg-8 col-md-8 d-inline-block">
+        <div class="col-lg-8 col-md-12 d-inline-block">
             <app-categories-list></app-categories-list>
             <app-list-page-station-list
                     :title="{
@@ -55,7 +55,7 @@
                               :colLgSize="8"
                               @selectedRadio="onSelect"></app-list-page-station-list>
         </div>
-        <div class="col-lg-4 col-md-4 float-right">
+        <div class="col-lg-4 col-md-12 float-right">
             <app-list-page-station-list
                     :title="{
                         title: 'Часто слушают',
