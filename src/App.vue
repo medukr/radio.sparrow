@@ -2,11 +2,11 @@
     <div class="h-100">
         <div class="container-fluid">
             <div class="row">
-                <main class="main-content col-lg-12 col-md-12 col-sm-12 p-0">
+                <main class="main-content col-12 p-0">
                         <!-- Main Navbar -->
                         <app-main-navbar></app-main-navbar>
                     <!-- / .main-navbar -->
-                    <div class="">
+                    <div class="col-xl-10 col-12 m-auto">
                     <keep-alive>
                         <transition name="router">
                             <router-view></router-view>
@@ -14,7 +14,7 @@
                     </keep-alive>
                     </div>
                 </main>
-                <main class="main-content col-lg-12 col-md-12 col-sm-12 p-0">
+                <main class="main-content col-12 p-0">
                     <app-footer></app-footer>
                 </main>
             </div>

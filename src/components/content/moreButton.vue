@@ -12,7 +12,7 @@
     import {mapGetters} from 'vuex'
 
     export default {
-        name: "app-button",
+        name: "moreButton",
         props:{
             colSize: {
                 type: Number,
