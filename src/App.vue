@@ -93,7 +93,7 @@
         /*animation: slideIn 0.5s;*/
         -webkit-animation-duration: 0.75s;
         animation-duration: 0.75s;
-        -webkit-animation-name: fadeIn;
+        -webkit-animation-name:fadeIn;
         animation-name: fadeIn;
         /*opacity: 1;*/
     }
@@ -103,24 +103,27 @@
     }
 
     .router-leave{
-
     }
 
     .router-leave-active{
 
-        /*animation: slideOut 0.5s;*/
+        transition: opacity 0.5s cubic-bezier(.25,1,.1,1);
+        opacity: 0;
 
-        -webkit-animation-duration: 0.5s;
-        animation-duration: 0.5s;
-        -webkit-animation-name: fadeOut;
-        animation-name: fadeOut;
-        position: absolute;
-        /*opacity: 0;*/
+        /*-webkit-animation-duration: 0.5s;*/
+        /*animation-duration: 0.5s;*/
+        /*-webkit-animation-name: fadeOut;*/
+        /*animation-name: fadeOut;*/
+
+        max-width: 1440px;
+
 
 
     }
 
     .router-leave-to{
+        position: absolute;
+
     }
 
 
@@ -135,11 +138,21 @@
 
     .elements-leave-active{
         /*animation: slideOut 0.5s;*/
-        -webkit-animation-duration: 0.5s;
-        animation-duration: 0.5s;
-        -webkit-animation-name: fadeOut;
-        animation-name: fadeOut;
+        /*-webkit-animation-duration: 0.5s;*/
+        /*animation-duration: 0.5s;*/
+        /*-webkit-animation-name: fadeOut;*/
+        /*animation-name: fadeOut;*/
+
+        transition: opacity 0.5s cubic-bezier(.25,1,.1,1);
+        opacity: 0;
+
+        max-width: 1440px;
+
+    }
+
+    .elements-leave-to{
         position: absolute;
+
     }
 
 
