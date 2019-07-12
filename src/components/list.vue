@@ -4,7 +4,7 @@
         <app-page-header
         :title="title"></app-page-header>
         <!-- End Page Header -->
-        <div class="col-lg-9 col-md-9 d-inline-block">
+        <div class="col-lg-8 col-md-8 d-inline-block">
             <app-categories-list></app-categories-list>
             <app-list-page-station-list
                     :title="{
@@ -12,7 +12,7 @@
                         slug: 'recent'
                     }"
                     :stations="recent"
-                    :colLgSize="9"
+                    :colLgSize="8"
                     @selectedRadio="onSelect"></app-list-page-station-list>
             <app-list-page-station-list v-if="getStations('speech')"
                     :title="{
@@ -20,7 +20,7 @@
                         slug: 'talk-speech'
                         }"
                     :stations="getStations('speech')"
-                    :colLgSize="9"
+                    :colLgSize="8"
                     @selectedRadio="onSelect"></app-list-page-station-list>
             <app-list-page-station-list v-if="getStations('pop')"
                     :title="{
@@ -28,7 +28,7 @@
                         slug: 'pop'
                     }"
                     :stations="getStations('pop')"
-                    :colLgSize="9"
+                    :colLgSize="8"
                     @selectedRadio="onSelect"></app-list-page-station-list>
             <app-list-page-station-list v-if="getStations('dance')"
                     :title="{
@@ -36,7 +36,7 @@
                         slug: 'dance'
                     }"
                     :stations="getStations('dance')"
-                    :colLgSize="9"
+                    :colLgSize="8"
                     @selectedRadio="onSelect"></app-list-page-station-list>
             <app-list-page-station-list v-if="getStations('electronic')"
                     :title="{
@@ -44,7 +44,7 @@
                         slug: 'electronic'
                     }"
                     :stations="getStations('electronic')"
-                    :colLgSize="9"
+                    :colLgSize="8"
                     @selectedRadio="onSelect"></app-list-page-station-list>
             <app-list-page-station-list v-if="getStations('decades')"
                               :title="{
@@ -52,17 +52,17 @@
                               slug: 'decades'
                               }"
                               :stations="getStations('decades')"
-                              :colLgSize="9"
+                              :colLgSize="8"
                               @selectedRadio="onSelect"></app-list-page-station-list>
         </div>
-        <div class="col-lg-3 col-md-3 float-right">
+        <div class="col-lg-4 col-md-4 float-right">
             <app-list-page-station-list
                     :title="{
                         title: 'Часто слушают',
                         slug: 'popular'
                     }"
                     :stations="popular"
-                    :colLgSize="3"
+                    :colLgSize="4"
                     @selectedRadio="onSelect"></app-list-page-station-list>
         </div>
     </div>

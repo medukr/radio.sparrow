@@ -2,7 +2,12 @@ export default {
     namespaced: true,
     state: {
         scrollTop: window.pageYOffset + window.innerHeight,
-        documentTitle: 'Radio.Sparrow'
+        documentTitle: 'Radio.Sparrow',
+        cardColClasses: {
+            'col-12-classes' : ['col col-lg-2 col-md-2 col-sm-4 col-6 mb-4 d-inline-block'],
+            'col-8-classes' : ['col col-lg-3 col-md-3 col-sm-4 col-6 mb-4 d-inline-block'],
+            'col-4-classes' : ['col col-lg-6 col-md-6 col-sm-4 col-6 mb-4 d-inline-block'],
+        }
     },
     getters: {
         scrollTop(state){
@@ -11,6 +16,9 @@ export default {
        documentTitle(state){
           return state.documentTitle;
         },
+        cardColClasses(state){
+            return state.cardColClasses;
+        }
     },
     mutations:{
         setScrollTop(state, data){

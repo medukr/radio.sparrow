@@ -13,12 +13,15 @@
                                 @selectedRadio="onSelect(station)">
                         </app-station-card>
 
-                        <template v-if="true">
-                            <div class="btn col-lg-2 col-md-3 col-sm-4 col-6 mb-4 d-inline-block bg-custom-card m-auto pointer-event"
-                                 @click="onClickMore()">
-                                <h5 class="navbar-link text-muted">Больше...</h5>
-                            </div>
-                        </template>
+                        <app-button
+                                :colSize="colLgSize"
+                                @click="onClickMore()"></app-button>
+
+<!--                            <div class="btn col-lg-2 col-md-3 col-sm-4 col-6 mb-4 d-inline-block bg-custom-card m-auto pointer-event"-->
+<!--                                 @click="onClickMore()">-->
+<!--                                <h5 class="navbar-link text-muted">Больше...</h5>-->
+<!--                            </div>-->
+
 
                     </template>
                     <h5 v-else>Ничего не найдено</h5>
@@ -35,11 +38,13 @@
 <script>
     import AppStationCard from './stationCard'
     import AppCssLoad from './cssLoad'
+    import AppButton from './moreButton'
 
     export default {
         components: {
             AppStationCard,
             AppCssLoad,
+            AppButton
         },
         props: {
             title: {

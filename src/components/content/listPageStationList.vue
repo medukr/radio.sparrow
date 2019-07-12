@@ -2,34 +2,26 @@
     <div class="main-content-container mb-5">
         <h4 v-if="title">{{title.title}}</h4>
         <div class="row">
-                <template v-if="!!(stations)">
-                    <template v-if="!isEmpty">
-                        <app-station-card
-                                v-for="(station,index) in stations"
-                                :station="station"
-                                :colSize="colLgSize"
-                                :key="(station.id + randSolt() + index)"
-                                @selectedRadio="onSelect(station)"></app-station-card>
-                        <template v-if="true">
-                            <div class="row">
-                                <router-link
-                                        tag="a"
-                                        class="btn col d-inline-block bg-custom-card pointer-event mx-4"
-                                        :key="title.slug + randSolt()"
-                                        :to="{name: 'listFromCategory',
-                                                 params: {
-                                                    slug: title.slug
-                                                 }}"><h5
-                                        class="navbar-link text-muted">Больше...</h5></router-link>
-                            </div>
-                        </template>
-                    </template>
+            <template v-if="!!(stations)">
+                <template v-if="!isEmpty">
+                    <app-station-card
+                            v-for="(station,index) in stations"
+                            :station="station"
+                            :colSize="colLgSize"
+                            :key="(station.id + randSolt() + index)"
+                            @selectedRadio="onSelect(station)"></app-station-card>
+
+                        <app-router-button
+                            :title="title"
+                            :colSize="colLgSize"></app-router-button>
+
                 </template>
-                <template v-else>
-                    <transition name="elements">
-                   <app-css-load></app-css-load>
-                    </transition>
-                </template>
+            </template>
+            <template v-else>
+                <transition name="elements">
+                    <app-css-load></app-css-load>
+                </transition>
+            </template>
         </div>
     </div>
 </template>
@@ -37,11 +29,14 @@
 <script>
     import AppStationCard from './stationCard'
     import AppCssLoad from './cssLoad'
+    import AppRouterButton from './routerButton'
 
     export default {
-            components: {
+        components: {
             AppStationCard,
             AppCssLoad,
+            AppRouterButton
+
         },
         props: {
             title: {
@@ -55,12 +50,11 @@
                 default: 12
             }
         },
-        data(){
-            return {
-            }
+        data() {
+            return {}
         },
         computed: {
-            isEmpty(){
+            isEmpty() {
                 return this.stations.length === 0;
             }
         },
@@ -68,10 +62,10 @@
             onSelect(station) {
                 this.$emit('selectedRadio', station)
             },
-            randSolt(){
+            randSolt() {
                 return Math.floor(Math.random() * Math.floor(10000)).toString();
             },
-            onClickMore(){
+            onClickMore() {
                 this.$emit('onClickMore')
             }
         },

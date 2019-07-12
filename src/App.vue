@@ -6,11 +6,13 @@
                         <!-- Main Navbar -->
                         <app-main-navbar></app-main-navbar>
                     <!-- / .main-navbar -->
+                    <div class="">
                     <keep-alive>
                         <transition name="router">
                             <router-view></router-view>
                         </transition>
                     </keep-alive>
+                    </div>
                 </main>
                 <main class="main-content col-lg-12 col-md-12 col-sm-12 p-0">
                     <app-footer></app-footer>

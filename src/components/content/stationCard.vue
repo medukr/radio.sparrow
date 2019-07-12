@@ -27,11 +27,6 @@
         },
         data(){
             return{
-                colClasses: {
-                    'col-12-classes' : ['col col-lg-2 col-md-3 col-sm-4 col-6 mb-4 d-inline-block'],
-                    'col-9-classes' : ['col col-lg-2 col-md-3 col-sm-4 col-6 mb-4 d-inline-block'],
-                    'col-3-classes' : ['col col-lg-6 col-md-12 col-sm-4 col-6 mb-4 d-inline-block'],
-                },
                 showImage: false
             }
         },
@@ -41,7 +36,8 @@
                 countries: 'countries'
             }),
             ...mapGetters('service',{
-                scrollTop: 'scrollTop'
+                scrollTop: 'scrollTop',
+                colClasses: 'cardColClasses'
             }),
             radioStationImage(){
                 return "background-image: url('" + this.lazyImageUrl + "');"
